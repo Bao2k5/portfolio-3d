@@ -11,134 +11,102 @@ const navLinks = [
     name: "Skills",
     link: "#skills",
   },
-  {
-    name: "Testimonials",
-    link: "#testimonials",
-  },
 ];
 
 const words = [
-  { text: "Ideas", imgPath: "/images/ideas.svg" },
-  { text: "Concepts", imgPath: "/images/concepts.svg" },
-  { text: "Designs", imgPath: "/images/designs.svg" },
-  { text: "Code", imgPath: "/images/code.svg" },
-  { text: "Ideas", imgPath: "/images/ideas.svg" },
-  { text: "Concepts", imgPath: "/images/concepts.svg" },
-  { text: "Designs", imgPath: "/images/designs.svg" },
-  { text: "Code", imgPath: "/images/code.svg" },
+  { text: "Backend", imgPath: "/images/ideas.svg" },
+  { text: "Cloud", imgPath: "/images/concepts.svg" },
+  { text: "Edge AI", imgPath: "/images/designs.svg" },
+  { text: "IoT", imgPath: "/images/code.svg" },
+  { text: "Backend", imgPath: "/images/ideas.svg" },
+  { text: "Cloud", imgPath: "/images/concepts.svg" },
+  { text: "Edge AI", imgPath: "/images/designs.svg" },
+  { text: "IoT", imgPath: "/images/code.svg" },
 ];
 
 const counterItems = [
-  { value: 15, suffix: "+", label: "Years of Experience" },
-  { value: 200, suffix: "+", label: "Satisfied Clients" },
-  { value: 108, suffix: "+", label: "Completed Projects" },
-  { value: 90, suffix: "%", label: "Client Retention Rate" },
+  { value: 100, suffix: "ms", label: "Edge AI Inference Latency" },
+  { value: 98, suffix: ".2%", label: "Face Verification Accuracy" },
+  { value: 3, suffix: "+", label: "Production-Ready Projects" },
+  { value: 2, suffix: "x", label: "Academic Scholarship Awarded" },
 ];
 
 const logoIconsList = [
-  {
-    imgPath: "/images/logos/company-logo-1.png",
-  },
-  {
-    imgPath: "/images/logos/company-logo-2.png",
-  },
-  {
-    imgPath: "/images/logos/company-logo-3.png",
-  },
-  {
-    imgPath: "/images/logos/company-logo-4.png",
-  },
-  {
-    imgPath: "/images/logos/company-logo-5.png",
-  },
-  {
-    imgPath: "/images/logos/company-logo-6.png",
-  },
-  {
-    imgPath: "/images/logos/company-logo-7.png",
-  },
-  {
-    imgPath: "/images/logos/company-logo-8.png",
-  },
-  {
-    imgPath: "/images/logos/company-logo-9.png",
-  },
-  {
-    imgPath: "/images/logos/company-logo-10.png",
-  },
-  {
-    imgPath: "/images/logos/company-logo-11.png",
-  },
+  { imgPath: "/images/logos/react.png" },
+  { imgPath: "/images/logos/node.png" },
+  { imgPath: "/images/logos/python.svg" },
+  { imgPath: "/images/logos/three.png" },
+  { imgPath: "/images/logos/git.svg" },
 ];
 
 const abilities = [
   {
     imgPath: "/images/seo.png",
-    title: "Quality Focus",
-    desc: "Delivering high-quality results while maintaining attention to every detail.",
+    title: "Full-Stack Web Development",
+    desc: "Building end-to-end web platforms with Next.js frontend and Node.js/Express backend deployed on AWS.",
   },
   {
     imgPath: "/images/chat.png",
-    title: "Reliable Communication",
-    desc: "Keeping you updated at every step to ensure transparency and clarity.",
+    title: "Edge AI & Computer Vision",
+    desc: "Running YOLOv11 & InsightFace locally at the edge for real-time video inference under 100ms.",
   },
   {
     imgPath: "/images/time.png",
-    title: "On-Time Delivery",
-    desc: "Making sure projects are completed on schedule, with quality & attention to detail.",
+    title: "Cloud & IoT Integration",
+    desc: "Architecting AWS cloud systems (EC2, IoT Core, DynamoDB) connected to ESP32 hardware for real-time control.",
   },
 ];
 
 const techStackImgs = [
   {
-    name: "React Developer",
+    name: "Next.js Developer",
     imgPath: "/images/logos/react.png",
   },
   {
-    name: "Python Developer",
+    name: "Python / ML Engineer",
     imgPath: "/images/logos/python.svg",
   },
   {
-    name: "Backend Developer",
+    name: "Node.js Backend",
     imgPath: "/images/logos/node.png",
   },
   {
-    name: "Interactive Developer",
+    name: "Three.js / WebGL",
     imgPath: "/images/logos/three.png",
   },
   {
-    name: "Project Manager",
+    name: "Git & DevOps",
     imgPath: "/images/logos/git.svg",
   },
 ];
 
 const techStackIcons = [
   {
-    name: "React Developer",
+    name: "Next.js Developer",
     modelPath: "/models/react_logo-transformed.glb",
     scale: 1,
     rotation: [0, 0, 0],
   },
   {
-    name: "Python Developer",
+    name: "Python / ML Engineer",
     modelPath: "/models/python-transformed.glb",
     scale: 0.8,
     rotation: [0, 0, 0],
   },
   {
-    name: "Backend Developer",
+    name: "Node.js Backend",
     modelPath: "/models/node-transformed.glb",
     scale: 5,
     rotation: [0, -Math.PI / 2, 0],
   },
   {
-    name: "Interactive Developer",
+    name: "Three.js / WebGL",
     modelPath: "/models/three.js-transformed.glb",
     scale: 0.05,
     rotation: [0, 0, 0],
   },
   {
-    name: "Project Manager",
+    name: "Git & DevOps",
     modelPath: "/models/git-svg-transformed.glb",
     scale: 0.05,
     rotation: [0, -Math.PI / 4, 0],
@@ -147,119 +115,93 @@ const techStackIcons = [
 
 const expCards = [
   {
-    review: "Adrian brought creativity and technical expertise to the team, significantly improving our frontend performance. His work has been invaluable in delivering faster experiences.",
+    review:
+      "Le Duong Bao demonstrated strong cloud operations skills during his internship. He improved our resource utilization by 15% and proactively resolved VPC networking issues that had been blocking our team.",
     imgPath: "/images/exp1.png",
     logoPath: "/images/logo1.png",
-    title: "Frontend Developer",
-    date: "January 2023 - Present",
+    title: "Cloud Operations Intern",
+    date: "January 2025 - June 2025",
     responsibilities: [
-      "Developed and maintained user-facing features for the Hostinger website.",
-      "Collaborated closely with UI/UX designers to ensure seamless user experiences.",
-      "Optimized web applications for maximum speed and scalability.",
+      "Monitored and maintained AWS cloud resources (EC2, S3, RDS) using CloudWatch, improving system availability and resource utilization by 15%.",
+      "Configured and audited AWS IAM permissions and security policies following the principle of least privilege, reducing potential access risks by 20%.",
+      "Troubleshot VPC networking issues (subnets, route tables, security groups) to maintain secure, high-uptime backend communication.",
     ],
   },
   {
-    review: "Adrian’s contributions to Docker's web applications have been outstanding. He approaches challenges with a problem-solving mindset.",
+    review:
+      "The Smart Jewelry Store project is a technically ambitious O2O system that combines AI, IoT, e-commerce, and cloud — all working seamlessly together. Impressive work for a graduation thesis.",
     imgPath: "/images/exp2.png",
     logoPath: "/images/logo2.png",
-    title: "Full Stack Developer",
-    date: "June 2020 - December 2023",
+    title: "Full-Stack & Edge AI Developer",
+    date: "December 2025 - April 2026",
     responsibilities: [
-      "Led the development of Docker's web applications, focusing on scalability.",
-      "Worked with backend engineers to integrate APIs seamlessly with the frontend.",
-      "Contributed to open-source projects that were used with the Docker ecosystem.",
+      "Designed and implemented a Hybrid Cloud-Edge O2O system with a Next.js/Node.js web platform deployed on AWS EC2 & MongoDB Atlas.",
+      "Deployed YOLOv11 and InsightFace at the edge for real-time intrusion detection and VIP recognition with <100ms inference latency and 98.2% accuracy.",
+      "Integrated Stripe & SePay VietQR payment webhooks and built an AI assistant chatbot using Gemini 1.5 Flash and local Ollama.",
     ],
   },
   {
-    review: "Adrian’s work on Appwrite’s mobile app brought a high level of quality and efficiency. He delivered solutions that enhanced our mobile experience & meet our product goals.",
+    review:
+      "The Credit Card Default Prediction pipeline showed strong understanding of data engineering and model optimization. Achieving 84.6% F1-score with LightGBM is a solid result.",
     imgPath: "/images/exp3.png",
     logoPath: "/images/logo3.png",
-    title: "React Native Developer",
-    date: "March 2019 - May 2020",
+    title: "Machine Learning Engineer",
+    date: "October 2025 - March 2026",
     responsibilities: [
-      "Built cross-platform mobile apps using React Native, integrating with Appwrite's backend services.",
-      "Improved app performance and user experience through code optimization and testing.",
-      "Coordinated with the product team to implement features based on feedback.",
+      "Developed an end-to-end machine learning pipeline for credit card default risk prediction.",
+      "Implemented feature scaling, encoding, and hyperparameter tuning on LightGBM to achieve an F1-score of 84.6%.",
+      "Compared multiple algorithms (Random Forest, XGBoost, LightGBM) and documented model performance in Jupyter Notebooks.",
     ],
   },
 ];
 
 const expLogos = [
-  {
-    name: "logo1",
-    imgPath: "/images/logo1.png",
-  },
-  {
-    name: "logo2",
-    imgPath: "/images/logo2.png",
-  },
-  {
-    name: "logo3",
-    imgPath: "/images/logo3.png",
-  },
+  { name: "logo1", imgPath: "/images/logo1.png" },
+  { name: "logo2", imgPath: "/images/logo2.png" },
+  { name: "logo3", imgPath: "/images/logo3.png" },
 ];
 
 const testimonials = [
   {
-    name: "Esther Howard",
-    mentions: "@estherhoward",
+    name: "ThS. Huỳnh Thanh Sơn",
+    mentions: "@Vietnam Aviation Academy",
     review:
-      "I can’t say enough good things about Adrian. He was able to take our complex project requirements and turn them into a seamless, functional website. His problem-solving abilities are outstanding.",
+      "Bảo's graduation thesis on Smart Jewelry Store is one of the most comprehensive final-year projects I have supervised. The combination of Edge AI, IoT, e-commerce, and cloud computing in a single coherent system demonstrates exceptional initiative and engineering depth.",
     imgPath: "/images/client1.png",
   },
   {
-    name: "Wade Warren",
-    mentions: "@wadewarren",
+    name: "AWS Supervisor",
+    mentions: "@Amazon Web Services",
     review:
-      "Working with Adrian was a fantastic experience. He transformed our outdated website into a modern, user-friendly platform. His attention to detail and commitment to quality are unmatched. Highly recommend him for any web dev projects.",
+      "During his internship, Bao showed strong attention to cloud security and infrastructure detail. His CloudWatch dashboards and IAM audit reports were delivered ahead of schedule and were highly accurate.",
     imgPath: "/images/client3.png",
   },
   {
-    name: "Guy Hawkins",
-    mentions: "@guyhawkins",
+    name: "Project Collaborator",
+    mentions: "@Smart Jewelry Store Team",
     review:
-      "Collaborating with Adrian was an absolute pleasure. His professionalism, promptness, and dedication to delivering exceptional results were evident throughout our project. Adrian's enthusiasm for every facet of development truly stands out. If you're seeking to elevate your website and elevate your brand, Adrian is the ideal partner.",
+      "Working with Bao was a great experience. He led the backend and AI integration with clear communication and consistently delivered working features on time.",
     imgPath: "/images/client2.png",
   },
   {
-    name: "Marvin McKinney",
-    mentions: "@marvinmckinney",
+    name: "Đặng Cao Minh Anh",
+    mentions: "@Thesis Team Member",
     review:
-      "Adrian was a pleasure to work with. He turned our outdated website into a fresh, intuitive platform that’s both modern and easy to navigate. Fantastic work overall.",
+      "Bao is a hardworking and technically strong teammate. His ability to connect Edge AI with IoT hardware in real-time was the most impressive engineering challenge we solved together.",
     imgPath: "/images/client5.png",
-  },
-  {
-    name: "Floyd Miles",
-    mentions: "@floydmiles",
-    review:
-      "Adrian’s expertise in web development is truly impressive. He delivered a robust and scalable solution for our e-commerce site, and our online sales have significantly increased since the launch. He’s a true professional!",
-    imgPath: "/images/client4.png",
-  },
-  {
-    name: "Albert Flores",
-    mentions: "@albertflores",
-    review:
-      "Adrian was a pleasure to work with. He understood our requirements perfectly and delivered a website that exceeded our expectations. His skills in both frontend and backend dev are top-notch.",
-    imgPath: "/images/client6.png",
   },
 ];
 
 const socialImgs = [
   {
-    name: "insta",
+    name: "github",
     imgPath: "/images/insta.png",
-  },
-  {
-    name: "fb",
-    imgPath: "/images/fb.png",
-  },
-  {
-    name: "x",
-    imgPath: "/images/x.png",
+    url: "https://github.com/Bao2k5",
   },
   {
     name: "linkedin",
     imgPath: "/images/linkedin.png",
+    url: "https://linkedin.com/in/baoleduong",
   },
 ];
 

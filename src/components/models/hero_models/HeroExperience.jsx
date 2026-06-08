@@ -1,42 +1,87 @@
+import { useRef, useMemo } from "react";
+import { Canvas, useFrame } from "@react-three/fiber";
 import { OrbitControls } from "@react-three/drei";
-import { Canvas } from "@react-three/fiber";
-import { useMediaQuery } from "react-responsive";
 
-import { Room } from "./Room";
-import HeroLights from "./HeroLights";
-import Particles from "./Particles";
-import { Suspense } from "react";
+const ParticleWave = () => {
+  const count = 3600;
+  const points = useRef();
 
-const HeroExperience = () => {
-  const isMobile = useMediaQuery({ query: "(max-width: 768px)" });
-  const isTablet = useMediaQuery({ query: "(max-width: 1024px)" });
+  // Create grid coordinates
+  const [positions, step] = useMemo(() => {
+    const temp = new Float32Array(count * 3);
+    const step = Math.sqrt(count);
+    let i = 0;
+    for (let x = 0; x < step; x++) {
+      for (let z = 0; z < step; z++) {
+        const u = (x / step - 0.5) * 16;
+        const v = (z / step - 0.5) * 16;
+        temp[i++] = u; // X
+        temp[i++] = 0; // Y (animated)
+        temp[i++] = v; // Z
+      }
+    }
+    return [temp, step];
+  }, [count]);
+
+  useFrame((state) => {
+    const time = state.clock.getElapsedTime();
+    const array = points.current.geometry.attributes.position.array;
+    let index = 0;
+    for (let x = 0; x < step; x++) {
+      for (let z = 0; z < step; z++) {
+        const u = (x / step - 0.5) * 16;
+        const v = (z / step - 0.5) * 16;
+        
+        // Dynamic wave logic
+        const dist = Math.sqrt(u * u + v * v);
+        const y = Math.sin(dist * 0.8 - time * 2.5) * 0.7 + Math.cos(u * 1.5 + time) * 0.3;
+        
+        array[index * 3 + 1] = y; // update Y
+        index++;
+      }
+    }
+    points.current.geometry.attributes.position.needsUpdate = true;
+  });
 
   return (
-    <Canvas camera={{ position: [0, 0, 15], fov: 45 }}>
-      {/* deep blue ambient */}
-      <ambientLight intensity={0.2} color="#1a1a40" />
-      {/* Configure OrbitControls to disable panning and control zoom based on device type */}
-      <OrbitControls
-        enablePan={false} // Prevents panning of the scene
-        enableZoom={!isTablet} // Disables zoom on tablets
-        maxDistance={20} // Maximum distance for zooming out
-        minDistance={5} // Minimum distance for zooming in
-        minPolarAngle={Math.PI / 5} // Minimum angle for vertical rotation
-        maxPolarAngle={Math.PI / 2} // Maximum angle for vertical rotation
+    <points ref={points}>
+      <bufferGeometry>
+        <bufferAttribute
+          attach="attributes-position"
+          count={count}
+          array={positions}
+          itemSize={3}
+        />
+      </bufferGeometry>
+      <pointsMaterial
+        color="#00f0ff" // Glowing Neon Cyan
+        size={0.08}
+        sizeAttenuation
+        transparent
+        opacity={0.85}
+        depthWrite={false}
+        blending={2} // Additive blending
       />
+    </points>
+  );
+};
 
-      <Suspense fallback={null}>
-        <HeroLights />
-        <Particles count={100} />
-        <group
-          scale={isMobile ? 0.7 : 1}
-          position={[0, -3.5, 0]}
-          rotation={[0, -Math.PI / 4, 0]}
-        >
-          <Room />
-        </group>
-      </Suspense>
-    </Canvas>
+const HeroExperience = () => {
+  return (
+    <div style={{ width: "100%", height: "100%" }}>
+      <Canvas camera={{ position: [0, 6, 12], fov: 45 }}>
+        <ambientLight intensity={0.5} />
+        <OrbitControls
+          enablePan={false}
+          enableZoom={true}
+          maxDistance={18}
+          minDistance={6}
+          autoRotate
+          autoRotateSpeed={0.8}
+        />
+        <ParticleWave />
+      </Canvas>
+    </div>
   );
 };
 
