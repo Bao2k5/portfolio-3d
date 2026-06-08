@@ -30,6 +30,14 @@ const projectCategories = {
       link: "https://github.com/Bao2k5/pythonbaitap",
       image: "/images/game_space.png",
       tagline: "Autonomous Space AI 🚀"
+    },
+    {
+      title: "Collaborative Game Project (detaigame)",
+      desc: "A collaborative 2D game development project focused on core gameplay mechanics, level design, and teamwork integration.",
+      tech: ["Game Development", "Team Collaboration"],
+      link: "https://github.com/phuccka12/detaigame",
+      image: "/images/logo2.png",
+      tagline: "Collaborative Game 🎮"
     }
   ],
   aiIot: [
@@ -64,6 +72,22 @@ const projectCategories = {
       link: "https://github.com/Bao2k5/Xulianhvathigiacmaytinh",
       image: "/images/logo2.png",
       tagline: "Computer Vision 👁️"
+    },
+    {
+      title: "XLA_TL (Image Processing Essay)",
+      desc: "An academic research and implementation project covering advanced image processing algorithms and techniques.",
+      tech: ["Python", "Image Processing", "Research"],
+      link: "https://github.com/MinhAnh248/XLA_TL",
+      image: "/images/logo1.png",
+      tagline: "Academic Essay 📚"
+    },
+    {
+      title: "AI Team Portfolio",
+      desc: "A collaborative showcase platform displaying various AI solutions and models implemented by the NVT AI Solution Team.",
+      tech: ["AI Research", "Team Showcase", "Web"],
+      link: "https://github.com/NVT-AI-Solution-Teams/AI-Team-Portfolio",
+      image: "/images/logo3.png",
+      tagline: "Team Portfolio 🤖"
     }
   ],
   webFullstack: [
@@ -98,6 +122,30 @@ const projectCategories = {
       link: "https://github.com/Bao2k5/luyentienganh",
       image: "/images/logo3.png",
       tagline: "Interactive Education 📖"
+    },
+    {
+      title: "AzuraLand",
+      desc: "A collaborative team project (AzuraLand). Focusing on seamless user experiences, rich interactive interfaces, and robust architecture.",
+      tech: ["Web Development", "Frontend", "Teamwork"],
+      link: "https://github.com/HungLEEE2709/AzuraLand",
+      image: "/images/logo1.png",
+      tagline: "Team Project 🤝"
+    },
+    {
+      title: "Đồ Án Chuyên Ngành (DoAnCN)",
+      desc: "Major specialized project focusing on comprehensive software development from architecture design to implementation.",
+      tech: ["Software Engineering", "Fullstack", "Collaboration"],
+      link: "https://github.com/HungLEEE2709/DoAnCN",
+      image: "/images/logo2.png",
+      tagline: "Major Project 🎓"
+    },
+    {
+      title: "LaptrinhPy (Python Programming)",
+      desc: "A collection of collaborative Python programming exercises and mini-projects demonstrating problem-solving skills.",
+      tech: ["Python", "Algorithms", "Data Structures"],
+      link: "https://github.com/HungLEEE2709/LaptrinhPy",
+      image: "/images/logo3.png",
+      tagline: "Programming 🐍"
     }
   ]
 };
