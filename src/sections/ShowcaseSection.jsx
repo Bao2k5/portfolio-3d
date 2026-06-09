@@ -36,8 +36,24 @@ const projectCategories = {
       desc: "A collaborative 2D game development project focused on core gameplay mechanics, level design, and teamwork integration.",
       tech: ["Game Development", "Team Collaboration"],
       link: "https://github.com/phuccka12/detaigame",
-      image: "/images/logo2.png",
+      image: "/images/game_collab.png",
       tagline: "Collaborative Game 🎮"
+    },
+    {
+      title: "AzuraLand",
+      desc: "A vibrant magical 3D video game world (AzuraLand) focusing on immersive gameplay and collaborative game level design.",
+      tech: ["Unity 3D", "C#", "ShaderLab", "HLSL"],
+      link: "https://github.com/HungLEEE2709/AzuraLand",
+      image: "/images/azuraland.png",
+      tagline: "Unity 3D Game 🎮"
+    },
+    {
+      title: "Đồ Án Chuyên Ngành (Multiplayer Game)",
+      desc: "A complex multiplayer Unity game utilizing ParrelSync for local clone testing. Features a robust client-server architecture with dedicated BE and FE network sync.",
+      tech: ["Unity 3D", "C#", "Networking", "ParrelSync"],
+      link: "https://github.com/HungLEEE2709/DoAnCN",
+      image: "/images/doancn.png",
+      tagline: "Multiplayer Game ⚔️"
     }
   ],
   aiIot: [
@@ -70,7 +86,7 @@ const projectCategories = {
       desc: "Custom implementation of computer vision algorithms, filters (gaussian, median), edge detection kernels, and morphology operations.",
       tech: ["Python", "OpenCV", "NumPy", "Computer Vision"],
       link: "https://github.com/Bao2k5/Xulianhvathigiacmaytinh",
-      image: "/images/logo2.png",
+      image: "/images/cv_library.png",
       tagline: "Computer Vision 👁️"
     },
     {
@@ -78,7 +94,7 @@ const projectCategories = {
       desc: "An academic research and implementation project covering advanced image processing algorithms and techniques.",
       tech: ["Python", "Image Processing", "Research"],
       link: "https://github.com/MinhAnh248/XLA_TL",
-      image: "/images/logo1.png",
+      image: "/images/xla_tl.png",
       tagline: "Academic Essay 📚"
     },
     {
@@ -86,7 +102,7 @@ const projectCategories = {
       desc: "A collaborative showcase platform displaying various AI solutions and models implemented by the NVT AI Solution Team.",
       tech: ["AI Research", "Team Showcase", "Web"],
       link: "https://github.com/NVT-AI-Solution-Teams/AI-Team-Portfolio",
-      image: "/images/logo3.png",
+      image: "/images/ai_portfolio.png",
       tagline: "Team Portfolio 🤖"
     }
   ],
@@ -96,7 +112,7 @@ const projectCategories = {
       desc: "Java Spring Boot fast food ordering platform with React client app. Features admin product listing, order management, secure cart checkout, and relational database logs.",
       tech: ["Java", "Spring Boot", "React", "MySQL", "Hibernate"],
       link: "https://github.com/Bao2k5/fastfood-fullstack",
-      image: "/images/logo3.png",
+      image: "/images/fastfood.png",
       tagline: "E-Commerce App 🍔"
     },
     {
@@ -104,7 +120,7 @@ const projectCategories = {
       desc: "Storefront and management portal layouts built with Next.js and Tailwind CSS. Features Redux state controls and mobile-responsive product galleries.",
       tech: ["Next.js", "Tailwind CSS", "Redux Toolkit"],
       link: "https://github.com/Bao2k5/hmjewelry",
-      image: "/images/logo1.png",
+      image: "/images/hmjewelry.png",
       tagline: "Frontend Client 💎"
     },
     {
@@ -112,7 +128,7 @@ const projectCategories = {
       desc: "Phone retail web app utilizing Express server, Docker containers, MongoDB Atlas integration, and clean MVC architecture.",
       tech: ["Node.js", "Express.js", "MongoDB", "Docker"],
       link: "https://github.com/Bao2k5/doangit",
-      image: "/images/logo2.png",
+      image: "/images/doangit.png",
       tagline: "Collaborative Lab 📱"
     },
     {
@@ -120,31 +136,15 @@ const projectCategories = {
       desc: "English vocabulary and language flashcard application featuring customized quizzing and spaced repetition learning logic.",
       tech: ["HTML5", "CSS3", "JavaScript"],
       link: "https://github.com/Bao2k5/luyentienganh",
-      image: "/images/logo3.png",
+      image: "/images/english_app.png",
       tagline: "Interactive Education 📖"
-    },
-    {
-      title: "AzuraLand",
-      desc: "A collaborative team project (AzuraLand). Focusing on seamless user experiences, rich interactive interfaces, and robust architecture.",
-      tech: ["Web Development", "Frontend", "Teamwork"],
-      link: "https://github.com/HungLEEE2709/AzuraLand",
-      image: "/images/logo1.png",
-      tagline: "Team Project 🤝"
-    },
-    {
-      title: "Đồ Án Chuyên Ngành (DoAnCN)",
-      desc: "Major specialized project focusing on comprehensive software development from architecture design to implementation.",
-      tech: ["Software Engineering", "Fullstack", "Collaboration"],
-      link: "https://github.com/HungLEEE2709/DoAnCN",
-      image: "/images/logo2.png",
-      tagline: "Major Project 🎓"
     },
     {
       title: "LaptrinhPy (Python Programming)",
       desc: "A collection of collaborative Python programming exercises and mini-projects demonstrating problem-solving skills.",
       tech: ["Python", "Algorithms", "Data Structures"],
       link: "https://github.com/HungLEEE2709/LaptrinhPy",
-      image: "/images/logo3.png",
+      image: "/images/laptrinhpy.png",
       tagline: "Programming 🐍"
     }
   ]
@@ -252,7 +252,7 @@ const AppShowcase = () => {
               href={project.link}
               target="_blank"
               rel="noopener noreferrer"
-              className="group relative flex flex-col rounded-2xl border border-white-50/10 bg-black-100 overflow-hidden transition-all duration-300 hover:scale-[1.02] hover:border-cyan-500/30 hover:shadow-2xl hover:shadow-cyan-500/5 cursor-pointer"
+              className="group relative flex flex-col rounded-2xl glass-panel overflow-hidden transition-all duration-300 hover:scale-[1.02] hover:border-cyan-500/50 hover:shadow-[0_0_30px_rgba(69,222,196,0.15)] cursor-pointer"
             >
               <div className="relative aspect-video w-full overflow-hidden bg-black-200">
                 <img

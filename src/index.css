@@ -158,7 +158,7 @@ section {
     @apply w-full mt-20 px-5 md:px-20 py-10 md:py-20 flex items-center justify-center;
 
     .showcaselayout {
-      @apply flex xl:flex-row flex-col gap-10 justify-between;
+      @apply flex xl:flex-row flex-col gap-10 justify-between glass-panel p-6 md:p-10 rounded-3xl;
     }
 
     .first-project-wrapper {
@@ -231,7 +231,11 @@ section {
   }
 
   .card-border {
-    @apply border border-black-50 bg-black-100;
+    @apply border border-white/10 bg-black-100/50 backdrop-blur-md shadow-2xl;
+  }
+  
+  .glass-panel {
+    @apply bg-black/40 backdrop-blur-xl border border-white/10 shadow-[0_8px_32px_0_rgba(0,0,0,0.37)];
   }
 
   .marquee-item {
@@ -251,7 +255,7 @@ section {
   }
 
   .exp-card-wrapper {
-    @apply flex flex-col-reverse xl:flex-row xl:gap-20 gap-10 justify-between;
+    @apply flex flex-col-reverse xl:flex-row xl:gap-20 gap-10 justify-between glass-panel p-8 rounded-3xl;
   }
 
   .gradient-edge {

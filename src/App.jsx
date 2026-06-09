@@ -8,9 +8,12 @@ import ShowcaseSection from "./sections/ShowcaseSection";
 import LogoShowcase from "./sections/LogoShowcase";
 import FeatureCards from "./sections/FeatureCards";
 import Navbar from "./components/NavBar";
+import GlobalBackground from "./components/GlobalBackground";
+import AICopilot from "./components/AICopilot";
 
 const App = () => (
   <>
+    <GlobalBackground />
     <Navbar />
     <Hero />
     <ShowcaseSection />
@@ -21,6 +24,7 @@ const App = () => (
     <TechStack />
     <Contact />
     <Footer />
+    <AICopilot />
   </>
 );
 
