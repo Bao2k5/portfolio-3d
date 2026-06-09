@@ -5,6 +5,18 @@ import * as THREE from "three";
 
 const RealAirplane = () => {
   const group = useRef();
+  const lasersRef = useRef();
+  
+  const LASER_COUNT = 40;
+  const lasersData = useRef(
+    Array.from({ length: LASER_COUNT }, () => ({
+      active: false,
+      position: new THREE.Vector3(),
+      velocity: new THREE.Vector3(),
+      life: 0,
+    }))
+  );
+  const laserState = useRef({ nextIdx: 0, lastShoot: 0 });
   
   // Load the downloaded GLB model
   const { scene } = useGLTF("/models/airplane.glb");
@@ -62,17 +74,85 @@ const RealAirplane = () => {
       
       // Smoothly interpolate current rotation to the target rotation
       group.current.quaternion.slerp(dummy.quaternion, 0.1);
+      
+      // === SHOOTING LOGIC ===
+      // Shoot for 1 second every 5 seconds
+      const cycle = t % 5;
+      const isShooting = t > 2.5 && cycle < 1;
+      
+      if (isShooting && t - laserState.current.lastShoot > 0.05) {
+        const idx = laserState.current.nextIdx;
+        const laser = lasersData.current[idx];
+        laser.active = true;
+        laser.life = 0;
+        
+        // Get world position and direction of airplane
+        const worldPos = new THREE.Vector3();
+        const worldDir = new THREE.Vector3(0, 0, 1);
+        group.current.getWorldPosition(worldPos);
+        worldDir.applyQuaternion(group.current.quaternion).normalize();
+        
+        // Spawn slightly ahead of the nose
+        laser.position.copy(worldPos).add(worldDir.clone().multiplyScalar(1.5));
+        
+        // Bullet velocity + random spread
+        laser.velocity.copy(worldDir).multiplyScalar(80);
+        laser.velocity.x += (Math.random() - 0.5) * 3;
+        laser.velocity.y += (Math.random() - 0.5) * 3;
+        
+        laserState.current.nextIdx = (idx + 1) % LASER_COUNT;
+        laserState.current.lastShoot = t;
+        
+        // Recoil effect (push back) and Shake effect
+        group.current.position.add(worldDir.clone().multiplyScalar(-0.08));
+        group.current.rotation.z += (Math.random() - 0.5) * 0.1;
+      }
+    }
+    
+    // === UPDATE LASERS ===
+    if (lasersRef.current) {
+      const dummyObj = new THREE.Object3D();
+      for (let i = 0; i < LASER_COUNT; i++) {
+        const laser = lasersData.current[i];
+        if (laser.active) {
+          laser.life += 0.016; // approx 60fps delta
+          laser.position.add(laser.velocity.clone().multiplyScalar(0.016));
+          
+          dummyObj.position.copy(laser.position);
+          dummyObj.lookAt(laser.position.clone().add(laser.velocity));
+          dummyObj.rotateX(Math.PI / 2); // Align cylinder along trajectory
+          
+          // Stretch bullet based on speed for motion blur look
+          dummyObj.scale.set(1, 4, 1);
+          dummyObj.updateMatrix();
+          lasersRef.current.setMatrixAt(i, dummyObj.matrix);
+          
+          // Die after 1 second
+          if (laser.life > 1) {
+            laser.active = false;
+            dummyObj.scale.set(0, 0, 0);
+            dummyObj.updateMatrix();
+            lasersRef.current.setMatrixAt(i, dummyObj.matrix);
+          }
+        }
+      }
+      lasersRef.current.instanceMatrix.needsUpdate = true;
     }
   });
 
   return (
-    <group ref={group}>
-      {/* 
-        Adjust scale and rotation here if the downloaded model 
-        is too big, too small, or flying backward.
-      */}
-      <primitive object={airplaneScene} scale={0.015} rotation={[0, 0, 0]} />
-    </group>
+    <>
+      <group ref={group}>
+        {/* Adjust scale and rotation here if needed */}
+        <primitive object={airplaneScene} scale={0.015} rotation={[0, 0, 0]} />
+      </group>
+      
+      {/* Laser Projectiles */}
+      <instancedMesh ref={lasersRef} args={[null, null, LASER_COUNT]}>
+        <cylinderGeometry args={[0.02, 0.02, 1, 8]} />
+        <meshStandardMaterial color="#00ffff" emissive="#00ffff" emissiveIntensity={5} toneMapped={false} />
+      </instancedMesh>
+    </>
   );
 };
 
