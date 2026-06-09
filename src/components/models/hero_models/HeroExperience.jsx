@@ -18,6 +18,9 @@ const RealAirplane = () => {
   );
   const laserState = useRef({ nextIdx: 0, lastShoot: 0 });
   
+  const leftEngine = useRef();
+  const rightEngine = useRef();
+  
   // Load the downloaded GLB model
   const { scene } = useGLTF("/models/airplane.glb");
   
@@ -116,6 +119,17 @@ const RealAirplane = () => {
         group.current.position.add(forward.clone().multiplyScalar(-0.08));
         group.current.rotation.z += (Math.random() - 0.5) * 0.1;
       }
+      
+      // === AFTERBURNER LOGIC ===
+      if (leftEngine.current && rightEngine.current) {
+        // Base flicker
+        const flicker = 0.8 + Math.random() * 0.4;
+        // Intensify and elongate during shooting dash
+        const thrustScale = isShooting ? 2.5 : 1;
+        
+        leftEngine.current.scale.set(flicker, flicker * thrustScale, flicker);
+        rightEngine.current.scale.set(flicker, flicker * thrustScale, flicker);
+      }
     }
     
     // === UPDATE LASERS ===
@@ -154,6 +168,18 @@ const RealAirplane = () => {
       <group ref={group}>
         {/* Adjust scale and rotation here if needed */}
         <primitive object={airplaneScene} scale={0.015} rotation={[0, 0, 0]} />
+        
+        {/* Left Engine Afterburner */}
+        <mesh ref={leftEngine} position={[-0.55, 0.1, -4.5]} rotation={[Math.PI / 2, 0, 0]}>
+          <coneGeometry args={[0.25, 2, 16]} />
+          <meshStandardMaterial color="#ff8c00" emissive="#ff4500" emissiveIntensity={6} toneMapped={false} transparent opacity={0.9} />
+        </mesh>
+        
+        {/* Right Engine Afterburner */}
+        <mesh ref={rightEngine} position={[0.55, 0.1, -4.5]} rotation={[Math.PI / 2, 0, 0]}>
+          <coneGeometry args={[0.25, 2, 16]} />
+          <meshStandardMaterial color="#ff8c00" emissive="#ff4500" emissiveIntensity={6} toneMapped={false} transparent opacity={0.9} />
+        </mesh>
       </group>
       
       {/* Laser Projectiles */}
