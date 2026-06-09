@@ -53,14 +53,20 @@ const RealAirplane = () => {
       group.current.rotateZ(-Math.PI / 4); 
     } else {
       // HOVER & MOUSE TRACKING MODE
-      // Smoothly bring it to the exact center (0, 0, 0) + slight floating
-      const targetPos = new THREE.Vector3(0, Math.sin(t * 2) * 0.2, 0);
+      // Make the airplane move across the screen following the mouse
+      const isShooting = t > 2.5 && (t % 5) < 1.5; // Shoot for 1.5s every 5s
+      
+      const targetPos = new THREE.Vector3(
+        state.pointer.x * 10, // Move left/right heavily
+        state.pointer.y * 5 + Math.sin(t * 2) * 0.2, // Move up/down
+        isShooting ? 3 : 0 // Dash forward towards the screen when shooting!
+      );
       group.current.position.lerp(targetPos, 0.05);
 
-      // Mouse tracking: Calculate target look point based on mouse pointer
-      const targetX = state.pointer.x * 15;
-      const targetY = state.pointer.y * 15 + Math.sin(t * 2) * 0.2; 
-      const targetZ = 15; // Far away towards the screen
+      // Mouse tracking: Calculate target look point much further away
+      const targetX = state.pointer.x * 30;
+      const targetY = state.pointer.y * 30; 
+      const targetZ = 40; // Far away towards the screen
       
       const targetPosition = new THREE.Vector3(targetX, targetY, targetZ);
       
@@ -69,17 +75,13 @@ const RealAirplane = () => {
       dummy.position.copy(group.current.position);
       dummy.lookAt(targetPosition);
       
-      // Apply banking to the target state, NOT the current state
-      dummy.rotateZ(-state.pointer.x * Math.PI * 0.2);
+      // Apply aggressive banking when moving
+      dummy.rotateZ(-state.pointer.x * Math.PI * 0.3);
       
       // Smoothly interpolate current rotation to the target rotation
       group.current.quaternion.slerp(dummy.quaternion, 0.1);
       
       // === SHOOTING LOGIC ===
-      // Shoot for 1 second every 5 seconds
-      const cycle = t % 5;
-      const isShooting = t > 2.5 && cycle < 1;
-      
       if (isShooting && t - laserState.current.lastShoot > 0.05) {
         const idx = laserState.current.nextIdx;
         const laser = lasersData.current[idx];
