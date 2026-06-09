@@ -195,40 +195,42 @@ const RealAirplane = () => {
         {/* ================= MAIN JET ================= */}
         <group>
           <primitive object={mainJet} scale={0.015} rotation={[0, 0, 0]} />
-          {/* Main Jet Afterburners */}
-          <mesh ref={leftEngine} position={[-0.55, 0.1, -4.5]} rotation={[Math.PI / 2, 0, 0]}>
-            <coneGeometry args={[0.25, 2, 16]} />
-            <meshStandardMaterial color="#ff8c00" emissive="#ff4500" emissiveIntensity={6} toneMapped={false} transparent opacity={0.9} />
+          {/* Main Jet Afterburners (Cyan) */}
+          <mesh ref={leftEngine} position={[-0.22, 0.05, -1.8]} rotation={[-Math.PI / 2, 0, 0]}>
+            <coneGeometry args={[0.08, 0.8, 16]} />
+            <meshStandardMaterial color="#00aaff" emissive="#00ffff" emissiveIntensity={6} toneMapped={false} transparent opacity={0.9} />
           </mesh>
-          <mesh ref={rightEngine} position={[0.55, 0.1, -4.5]} rotation={[Math.PI / 2, 0, 0]}>
-            <coneGeometry args={[0.25, 2, 16]} />
-            <meshStandardMaterial color="#ff8c00" emissive="#ff4500" emissiveIntensity={6} toneMapped={false} transparent opacity={0.9} />
+          <mesh ref={rightEngine} position={[0.22, 0.05, -1.8]} rotation={[-Math.PI / 2, 0, 0]}>
+            <coneGeometry args={[0.08, 0.8, 16]} />
+            <meshStandardMaterial color="#00aaff" emissive="#00ffff" emissiveIntensity={6} toneMapped={false} transparent opacity={0.9} />
           </mesh>
         </group>
 
         {/* ================= LEFT WINGMAN ================= */}
         <group ref={leftWingmanGroup} position={[-5, -1.5, -5]}>
           <primitive object={leftWingman} scale={0.012} rotation={[0, 0, 0]} />
-          <mesh position={[-0.45, 0.08, -3.6]} rotation={[Math.PI / 2, 0, 0]}>
-            <coneGeometry args={[0.2, 1.5, 16]} />
-            <meshStandardMaterial color="#00aaff" emissive="#00ffff" emissiveIntensity={5} toneMapped={false} transparent opacity={0.8} />
+          {/* Left Wingman Afterburners (Magenta) */}
+          <mesh position={[-0.18, 0.04, -1.5]} rotation={[-Math.PI / 2, 0, 0]}>
+            <coneGeometry args={[0.06, 0.6, 16]} />
+            <meshStandardMaterial color="#ff00aa" emissive="#ff00ff" emissiveIntensity={5} toneMapped={false} transparent opacity={0.8} />
           </mesh>
-          <mesh position={[0.45, 0.08, -3.6]} rotation={[Math.PI / 2, 0, 0]}>
-            <coneGeometry args={[0.2, 1.5, 16]} />
-            <meshStandardMaterial color="#00aaff" emissive="#00ffff" emissiveIntensity={5} toneMapped={false} transparent opacity={0.8} />
+          <mesh position={[0.18, 0.04, -1.5]} rotation={[-Math.PI / 2, 0, 0]}>
+            <coneGeometry args={[0.06, 0.6, 16]} />
+            <meshStandardMaterial color="#ff00aa" emissive="#ff00ff" emissiveIntensity={5} toneMapped={false} transparent opacity={0.8} />
           </mesh>
         </group>
 
         {/* ================= RIGHT WINGMAN ================= */}
         <group ref={rightWingmanGroup} position={[5, -1.5, -5]}>
           <primitive object={rightWingman} scale={0.012} rotation={[0, 0, 0]} />
-          <mesh position={[-0.45, 0.08, -3.6]} rotation={[Math.PI / 2, 0, 0]}>
-            <coneGeometry args={[0.2, 1.5, 16]} />
-            <meshStandardMaterial color="#00aaff" emissive="#00ffff" emissiveIntensity={5} toneMapped={false} transparent opacity={0.8} />
+          {/* Right Wingman Afterburners (Yellow) */}
+          <mesh position={[-0.18, 0.04, -1.5]} rotation={[-Math.PI / 2, 0, 0]}>
+            <coneGeometry args={[0.06, 0.6, 16]} />
+            <meshStandardMaterial color="#ff8800" emissive="#ffaa00" emissiveIntensity={5} toneMapped={false} transparent opacity={0.8} />
           </mesh>
-          <mesh position={[0.45, 0.08, -3.6]} rotation={[Math.PI / 2, 0, 0]}>
-            <coneGeometry args={[0.2, 1.5, 16]} />
-            <meshStandardMaterial color="#00aaff" emissive="#00ffff" emissiveIntensity={5} toneMapped={false} transparent opacity={0.8} />
+          <mesh position={[0.18, 0.04, -1.5]} rotation={[-Math.PI / 2, 0, 0]}>
+            <coneGeometry args={[0.06, 0.6, 16]} />
+            <meshStandardMaterial color="#ff8800" emissive="#ffaa00" emissiveIntensity={5} toneMapped={false} transparent opacity={0.8} />
           </mesh>
         </group>
       </group>
