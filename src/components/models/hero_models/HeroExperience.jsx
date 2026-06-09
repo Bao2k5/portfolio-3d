@@ -96,15 +96,15 @@ const RealAirplane = () => {
       if (isShooting && t - laserState.current.lastShoot > 0.05) {
         const idx = laserState.current.nextIdx;
         
-        // Directions
-        _forward.set(0, 0, 1).applyQuaternion(group.current.quaternion).normalize();
+        // Directions (-Z is forward for the airplane model)
+        _forward.set(0, 0, -1).applyQuaternion(group.current.quaternion).normalize();
         _right.set(1, 0, 0).applyQuaternion(group.current.quaternion).normalize();
         _up.set(0, 1, 0).applyQuaternion(group.current.quaternion).normalize();
         
         // Common offsets (adjusted to fit the smaller plane scale)
         const isLeft = idx % 2 === 0;
-        _sideOffset.copy(_right).multiplyScalar(isLeft ? -0.6 : 0.6); // Middle of the wings
-        _forwardOffset.copy(_forward).multiplyScalar(0.5); // Under the wings
+        _sideOffset.copy(_right).multiplyScalar(isLeft ? -0.5 : 0.5); // Middle of the wings
+        _forwardOffset.copy(_forward).multiplyScalar(0.0); // Spawn at the center (under wings)
         _downOffset.copy(_up).multiplyScalar(-0.1); // Slightly down
         
         // --- MAIN JET (Cyan) ---
@@ -196,11 +196,11 @@ const RealAirplane = () => {
         <group>
           <primitive object={mainJet} scale={0.015} rotation={[0, 0, 0]} />
           {/* Main Jet Afterburners (Cyan) */}
-          <mesh ref={leftEngine} position={[-0.22, 0.05, -1.8]} rotation={[-Math.PI / 2, 0, 0]}>
+          <mesh ref={leftEngine} position={[-0.22, 0.05, 1.8]} rotation={[Math.PI / 2, 0, 0]}>
             <coneGeometry args={[0.08, 0.8, 16]} />
             <meshStandardMaterial color="#00aaff" emissive="#00ffff" emissiveIntensity={6} toneMapped={false} transparent opacity={0.9} />
           </mesh>
-          <mesh ref={rightEngine} position={[0.22, 0.05, -1.8]} rotation={[-Math.PI / 2, 0, 0]}>
+          <mesh ref={rightEngine} position={[0.22, 0.05, 1.8]} rotation={[Math.PI / 2, 0, 0]}>
             <coneGeometry args={[0.08, 0.8, 16]} />
             <meshStandardMaterial color="#00aaff" emissive="#00ffff" emissiveIntensity={6} toneMapped={false} transparent opacity={0.9} />
           </mesh>
@@ -210,11 +210,11 @@ const RealAirplane = () => {
         <group ref={leftWingmanGroup} position={[-5, -1.5, -5]}>
           <primitive object={leftWingman} scale={0.012} rotation={[0, 0, 0]} />
           {/* Left Wingman Afterburners (Magenta) */}
-          <mesh position={[-0.18, 0.04, -1.5]} rotation={[-Math.PI / 2, 0, 0]}>
+          <mesh position={[-0.18, 0.04, 1.5]} rotation={[Math.PI / 2, 0, 0]}>
             <coneGeometry args={[0.06, 0.6, 16]} />
             <meshStandardMaterial color="#ff00aa" emissive="#ff00ff" emissiveIntensity={5} toneMapped={false} transparent opacity={0.8} />
           </mesh>
-          <mesh position={[0.18, 0.04, -1.5]} rotation={[-Math.PI / 2, 0, 0]}>
+          <mesh position={[0.18, 0.04, 1.5]} rotation={[Math.PI / 2, 0, 0]}>
             <coneGeometry args={[0.06, 0.6, 16]} />
             <meshStandardMaterial color="#ff00aa" emissive="#ff00ff" emissiveIntensity={5} toneMapped={false} transparent opacity={0.8} />
           </mesh>
@@ -224,11 +224,11 @@ const RealAirplane = () => {
         <group ref={rightWingmanGroup} position={[5, -1.5, -5]}>
           <primitive object={rightWingman} scale={0.012} rotation={[0, 0, 0]} />
           {/* Right Wingman Afterburners (Yellow) */}
-          <mesh position={[-0.18, 0.04, -1.5]} rotation={[-Math.PI / 2, 0, 0]}>
+          <mesh position={[-0.18, 0.04, 1.5]} rotation={[Math.PI / 2, 0, 0]}>
             <coneGeometry args={[0.06, 0.6, 16]} />
             <meshStandardMaterial color="#ff8800" emissive="#ffaa00" emissiveIntensity={5} toneMapped={false} transparent opacity={0.8} />
           </mesh>
-          <mesh position={[0.18, 0.04, -1.5]} rotation={[-Math.PI / 2, 0, 0]}>
+          <mesh position={[0.18, 0.04, 1.5]} rotation={[Math.PI / 2, 0, 0]}>
             <coneGeometry args={[0.06, 0.6, 16]} />
             <meshStandardMaterial color="#ff8800" emissive="#ffaa00" emissiveIntensity={5} toneMapped={false} transparent opacity={0.8} />
           </mesh>
