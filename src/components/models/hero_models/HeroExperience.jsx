@@ -1,25 +1,16 @@
-import { useRef, useMemo } from "react";
+import { useRef, useMemo, Suspense } from "react";
 import { Canvas, useFrame } from "@react-three/fiber";
+import { useGLTF } from "@react-three/drei";
 import * as THREE from "three";
 
-const StealthJet = () => {
+const RealAirplane = () => {
   const group = useRef();
   
-  // Custom glowing materials
-  const jetMaterial = new THREE.MeshStandardMaterial({
-    color: "#00f0ff",
-    emissive: "#00f0ff",
-    emissiveIntensity: 0.8,
-    wireframe: true,
-    transparent: true,
-    opacity: 0.9,
-  });
-
-  const coreMaterial = new THREE.MeshStandardMaterial({
-    color: "#aa00ff",
-    emissive: "#8a2be2",
-    emissiveIntensity: 2,
-  });
+  // Load the downloaded GLB model
+  const { scene } = useGLTF("/models/airplane.glb");
+  
+  // Clone the scene so it can be reused safely
+  const airplaneScene = useMemo(() => scene.clone(), [scene]);
 
   useFrame((state) => {
     const t = state.clock.getElapsedTime();
@@ -55,7 +46,6 @@ const StealthJet = () => {
       group.current.position.lerp(targetPos, 0.05);
 
       // Mouse tracking: Calculate target look point based on mouse pointer
-      // state.pointer is normalized between -1 and 1
       const targetX = state.pointer.x * 15;
       const targetY = state.pointer.y * 15 + Math.sin(t * 2) * 0.2; 
       const targetZ = 15; // Far away towards the screen
@@ -77,45 +67,11 @@ const StealthJet = () => {
 
   return (
     <group ref={group}>
-      {/* Fuselage / Main Body (Diamond shape using 4 segments) */}
-      <mesh rotation={[-Math.PI / 2, 0, 0]} position={[0, 0, 1]}>
-        <cylinderGeometry args={[0, 0.7, 4, 4]} />
-        <primitive object={jetMaterial} attach="material" />
-      </mesh>
-
-      {/* Main Wings */}
-      <mesh position={[0, -0.2, -0.2]}>
-        <boxGeometry args={[5.5, 0.1, 1.5]} />
-        <primitive object={jetMaterial} attach="material" />
-      </mesh>
-
-      {/* Tail Wings */}
-      <mesh position={[0, 0, -1.2]} rotation={[0.1, 0, 0]}>
-        <boxGeometry args={[2.5, 0.1, 0.8]} />
-        <primitive object={jetMaterial} attach="material" />
-      </mesh>
-
-      {/* Vertical Tail Fins (Angled outwards) */}
-      <mesh position={[-0.8, 0.5, -1.2]} rotation={[0, 0, -0.4]}>
-        <boxGeometry args={[0.1, 1.2, 0.8]} />
-        <primitive object={jetMaterial} attach="material" />
-      </mesh>
-      <mesh position={[0.8, 0.5, -1.2]} rotation={[0, 0, 0.4]}>
-        <boxGeometry args={[0.1, 1.2, 0.8]} />
-        <primitive object={jetMaterial} attach="material" />
-      </mesh>
-
-      {/* Cloud/Data Engine Core */}
-      <mesh position={[0, 0, -1.2]} rotation={[Math.PI / 2, 0, 0]}>
-        <cylinderGeometry args={[0.3, 0.4, 0.8, 8]} />
-        <primitive object={coreMaterial} attach="material" />
-      </mesh>
-      
-      {/* Engine Thrust Flame */}
-      <mesh position={[0, 0, -2]} rotation={[Math.PI / 2, 0, 0]}>
-        <coneGeometry args={[0.2, 1.5, 8]} />
-        <meshStandardMaterial color="#ff00ff" emissive="#ff00ff" emissiveIntensity={4} transparent opacity={0.8} />
-      </mesh>
+      {/* 
+        Adjust scale and rotation here if the downloaded model 
+        is too big, too small, or flying backward.
+      */}
+      <primitive object={airplaneScene} scale={0.5} rotation={[0, 0, 0]} />
     </group>
   );
 };
@@ -175,12 +131,15 @@ const HeroExperience = () => {
   return (
     <div style={{ width: "100%", height: "100%" }}>
       <Canvas camera={{ position: [0, 0, 8], fov: 45 }}>
-        <ambientLight intensity={1} />
-        <directionalLight position={[10, 10, 10]} intensity={2} color="#00f0ff" />
-        <directionalLight position={[-10, -10, -10]} intensity={2} color="#ff00ff" />
+        {/* Ambient light to see the model properly */}
+        <ambientLight intensity={1.5} />
+        <directionalLight position={[10, 10, 10]} intensity={3} color="#ffffff" />
+        <directionalLight position={[-10, -10, -10]} intensity={1} color="#aaaaff" />
         
-        {/* We do NOT use OrbitControls here because the Jet tracks the mouse natively */}
-        <StealthJet />
+        <Suspense fallback={null}>
+          <RealAirplane />
+        </Suspense>
+        
         <WarpSpeedParticles />
       </Canvas>
     </div>
