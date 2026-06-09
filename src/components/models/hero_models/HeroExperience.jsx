@@ -42,11 +42,6 @@ const RealAirplane = () => {
   const { scene: mainScene } = useGLTF("/models/airplane.glb");
   const { scene: w1Scene } = useGLTF("/models/wingman1.glb");
   const { scene: w2Scene } = useGLTF("/models/wingman2.glb");
-  
-  // Clone the scenes
-  const mainJet = useMemo(() => mainScene.clone(), [mainScene]);
-  const leftWingman = useMemo(() => w1Scene.clone(), [w1Scene]);
-  const rightWingman = useMemo(() => w2Scene.clone(), [w2Scene]);
 
   useFrame((state) => {
     const t = state.clock.getElapsedTime();
@@ -196,7 +191,7 @@ const RealAirplane = () => {
       <group ref={group}>
         {/* ================= MAIN JET ================= */}
         <group>
-          <primitive object={mainJet} scale={0.015} rotation={[0, 0, 0]} />
+          <primitive object={mainScene} scale={0.015} rotation={[0, 0, 0]} />
           {/* Main Jet Afterburners */}
           <mesh ref={leftEngine} position={[-0.55, 0.1, -4.5]} rotation={[Math.PI / 2, 0, 0]}>
             <coneGeometry args={[0.25, 2, 16]} />
@@ -210,7 +205,7 @@ const RealAirplane = () => {
 
         {/* ================= LEFT WINGMAN ================= */}
         <group ref={leftWingmanGroup} position={[-5, -1.5, -5]}>
-          <primitive object={leftWingman} scale={0.012} rotation={[0, 0, 0]} />
+          <primitive object={w1Scene} scale={0.012} rotation={[0, 0, 0]} />
           <mesh position={[-0.45, 0.08, -3.6]} rotation={[Math.PI / 2, 0, 0]}>
             <coneGeometry args={[0.2, 1.5, 16]} />
             <meshStandardMaterial color="#00aaff" emissive="#00ffff" emissiveIntensity={5} toneMapped={false} transparent opacity={0.8} />
@@ -223,7 +218,7 @@ const RealAirplane = () => {
 
         {/* ================= RIGHT WINGMAN ================= */}
         <group ref={rightWingmanGroup} position={[5, -1.5, -5]}>
-          <primitive object={rightWingman} scale={0.012} rotation={[0, 0, 0]} />
+          <primitive object={w2Scene} scale={0.012} rotation={[0, 0, 0]} />
           <mesh position={[-0.45, 0.08, -3.6]} rotation={[Math.PI / 2, 0, 0]}>
             <coneGeometry args={[0.2, 1.5, 16]} />
             <meshStandardMaterial color="#00aaff" emissive="#00ffff" emissiveIntensity={5} toneMapped={false} transparent opacity={0.8} />
