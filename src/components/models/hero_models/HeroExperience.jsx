@@ -57,11 +57,11 @@ const RealAirplane = () => {
       dummy.position.copy(group.current.position);
       dummy.lookAt(targetPosition);
       
+      // Apply banking to the target state, NOT the current state
+      dummy.rotateZ(-state.pointer.x * Math.PI * 0.2);
+      
       // Smoothly interpolate current rotation to the target rotation
       group.current.quaternion.slerp(dummy.quaternion, 0.1);
-      
-      // Add realistic flight banking (roll) when moving mouse horizontally
-      group.current.rotateZ(-state.pointer.x * Math.PI * 0.2);
     }
   });
 
