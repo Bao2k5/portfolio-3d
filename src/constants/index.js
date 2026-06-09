@@ -195,7 +195,7 @@ const testimonials = [
 const socialImgs = [
   {
     name: "github",
-    imgPath: "/images/insta.png",
+    imgPath: "/images/github.svg",
     url: "https://github.com/Bao2k5",
   },
   {
