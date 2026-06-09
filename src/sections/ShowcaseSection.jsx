@@ -151,7 +151,7 @@ const projectCategories = {
 };
 
 const AppShowcase = () => {
-  const [activeTab, setActiveTab] = useState("games");
+  const [activeTab, setActiveTab] = useState("webFullstack");
   const sectionRef = useRef(null);
   const gridRef = useRef(null);
 
@@ -216,14 +216,14 @@ const AppShowcase = () => {
         {/* Tab Switcher */}
         <div className="flex justify-center gap-2 md:gap-4 mb-12 bg-black-100 p-2 rounded-full border border-white-50/10 w-fit mx-auto shadow-2xl">
           <button
-            onClick={() => setActiveTab("games")}
+            onClick={() => setActiveTab("webFullstack")}
             className={`px-5 py-2.5 rounded-full text-xs md:text-sm font-semibold transition-all duration-300 cursor-pointer ${
-              activeTab === "games"
+              activeTab === "webFullstack"
                 ? "bg-cyan-500 text-black shadow-lg shadow-cyan-500/20"
                 : "text-white-50 hover:text-white"
             }`}
           >
-            🎮 Game Dev ({projectCategories.games.length})
+            💻 Web Dev ({projectCategories.webFullstack.length})
           </button>
           <button
             onClick={() => setActiveTab("aiIot")}
@@ -236,14 +236,14 @@ const AppShowcase = () => {
             🤖 AI & IoT ({projectCategories.aiIot.length})
           </button>
           <button
-            onClick={() => setActiveTab("webFullstack")}
+            onClick={() => setActiveTab("games")}
             className={`px-5 py-2.5 rounded-full text-xs md:text-sm font-semibold transition-all duration-300 cursor-pointer ${
-              activeTab === "webFullstack"
+              activeTab === "games"
                 ? "bg-cyan-500 text-black shadow-lg shadow-cyan-500/20"
                 : "text-white-50 hover:text-white"
             }`}
           >
-            💻 Web Dev ({projectCategories.webFullstack.length})
+            🎮 Game Dev ({projectCategories.games.length})
           </button>
         </div>
 
