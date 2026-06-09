@@ -179,6 +179,11 @@ const RealAirplane = () => {
             _dummyObj.updateMatrix();
             meshRef.current.setMatrixAt(i, _dummyObj.matrix);
           }
+        } else if (laser.life === 0) {
+          _dummyObj.scale.set(0, 0, 0);
+          _dummyObj.updateMatrix();
+          meshRef.current.setMatrixAt(i, _dummyObj.matrix);
+          laser.life = -1;
         }
       }
       meshRef.current.instanceMatrix.needsUpdate = true;
