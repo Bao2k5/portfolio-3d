@@ -71,7 +71,7 @@ const RealAirplane = () => {
         Adjust scale and rotation here if the downloaded model 
         is too big, too small, or flying backward.
       */}
-      <primitive object={airplaneScene} scale={0.01} rotation={[0, 0, 0]} />
+      <primitive object={airplaneScene} scale={0.015} rotation={[0, 0, 0]} />
     </group>
   );
 };
