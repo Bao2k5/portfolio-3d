@@ -192,8 +192,9 @@ const AppShowcase = () => {
   }, [activeTab]);
 
   return (
-    <div id="work" ref={sectionRef} className="app-showcase flex flex-col items-center w-full section-padding">
-      <div className="w-full max-w-7xl">
+    <section id="work" ref={sectionRef} className="app-showcase flex flex-col items-center w-full section-padding relative">
+      <div className="absolute inset-0 bg-grid-pattern mask-radial-faded pointer-events-none opacity-30" />
+      <div className="w-full max-w-7xl relative z-10">
         {/* Title and Subtitle */}
         <div className="flex flex-col items-center gap-4 mb-12 text-center">
           <div className="hero-badge">
@@ -306,7 +307,7 @@ const AppShowcase = () => {
           ))}
         </div>
       </div>
-    </div>
+    </section>
   );
 };
 

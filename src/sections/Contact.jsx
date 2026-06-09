@@ -40,8 +40,9 @@ const Contact = () => {
   };
 
   return (
-    <section id="contact" className="flex-center section-padding">
-      <div className="w-full h-full md:px-10 px-5">
+    <section id="contact" className="flex-center section-padding relative">
+      <div className="absolute inset-0 bg-grid-pattern mask-radial-faded pointer-events-none opacity-20" />
+      <div className="w-full h-full md:px-10 px-5 relative z-10">
         <TitleHeader
           title="Get in Touch – Let’s Connect"
           sub="💬 Have questions or ideas? Let’s talk! 🚀"

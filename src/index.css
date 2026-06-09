@@ -36,6 +36,31 @@ section {
   .flex-col-center {
     @apply flex flex-col justify-center items-center;
   }
+  
+  .bg-grid-pattern {
+    background-size: 40px 40px;
+    background-image: linear-gradient(to right, rgba(255, 255, 255, 0.05) 1px, transparent 1px),
+                      linear-gradient(to bottom, rgba(255, 255, 255, 0.05) 1px, transparent 1px);
+  }
+
+  .bg-dots-pattern {
+    background-image: radial-gradient(rgba(255, 255, 255, 0.1) 1px, transparent 1px);
+    background-size: 20px 20px;
+  }
+
+  .bg-cyber-lines {
+    background: repeating-linear-gradient(
+      0deg,
+      transparent,
+      transparent 19px,
+      rgba(0, 255, 255, 0.03) 20px
+    );
+  }
+
+  .mask-radial-faded {
+    mask-image: radial-gradient(circle at center, black 30%, transparent 80%);
+    -webkit-mask-image: radial-gradient(circle at center, black 30%, transparent 80%);
+  }
 }
 
 @layer components {
