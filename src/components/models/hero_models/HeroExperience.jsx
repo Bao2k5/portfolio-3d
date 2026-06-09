@@ -194,7 +194,7 @@ const RealAirplane = () => {
       <group ref={group}>
         {/* ================= MAIN JET ================= */}
         <group>
-          <primitive object={mainJet} scale={0.015} rotation={[0, -Math.PI / 2, 0]} />
+          <primitive object={mainJet} scale={0.015} rotation={[0, Math.PI / 2, 0]} />
           {/* Main Jet Afterburners (Cyan) */}
           <mesh ref={leftEngine} position={[-0.22, 0.05, 1.8]} rotation={[Math.PI / 2, 0, 0]}>
             <coneGeometry args={[0.08, 0.8, 16]} />
@@ -208,7 +208,7 @@ const RealAirplane = () => {
 
         {/* ================= LEFT WINGMAN ================= */}
         <group ref={leftWingmanGroup} position={[-5, -1.5, -5]}>
-          <primitive object={leftWingman} scale={0.012} rotation={[0, -Math.PI / 2, 0]} />
+          <primitive object={leftWingman} scale={0.012} rotation={[0, Math.PI / 2, 0]} />
           {/* Left Wingman Afterburners (Magenta) */}
           <mesh position={[-0.18, 0.04, 1.5]} rotation={[Math.PI / 2, 0, 0]}>
             <coneGeometry args={[0.06, 0.6, 16]} />
@@ -222,7 +222,7 @@ const RealAirplane = () => {
 
         {/* ================= RIGHT WINGMAN ================= */}
         <group ref={rightWingmanGroup} position={[5, -1.5, -5]}>
-          <primitive object={rightWingman} scale={0.012} rotation={[0, -Math.PI / 2, 0]} />
+          <primitive object={rightWingman} scale={0.012} rotation={[0, Math.PI / 2, 0]} />
           {/* Right Wingman Afterburners (Yellow) */}
           <mesh position={[-0.18, 0.04, 1.5]} rotation={[Math.PI / 2, 0, 0]}>
             <coneGeometry args={[0.06, 0.6, 16]} />
