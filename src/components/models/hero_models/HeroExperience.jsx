@@ -5,21 +5,23 @@ import * as THREE from "three";
 
 const RealAirplane = () => {
   const group = useRef();
-  const lasersRef = useRef();
+  const lasersRef1 = useRef();
+  const lasersRef2 = useRef();
+  const lasersRef3 = useRef();
   
-  const LASER_COUNT = 40;
-  const lasersData = useRef(
-    Array.from({ length: LASER_COUNT }, () => ({
-      active: false,
-      position: new THREE.Vector3(),
-      velocity: new THREE.Vector3(),
-      life: 0,
-    }))
-  );
+  const LASER_COUNT = 30;
+  const createLaserData = () => Array.from({ length: LASER_COUNT }, () => ({
+    active: false, position: new THREE.Vector3(), velocity: new THREE.Vector3(), life: 0
+  }));
+  const lasersData1 = useRef(createLaserData());
+  const lasersData2 = useRef(createLaserData());
+  const lasersData3 = useRef(createLaserData());
   const laserState = useRef({ nextIdx: 0, lastShoot: 0 });
   
   const leftEngine = useRef();
   const rightEngine = useRef();
+  const leftWingmanGroup = useRef();
+  const rightWingmanGroup = useRef();
   
   // Load the downloaded GLB models
   const { scene: mainScene } = useGLTF("/models/airplane.glb");
@@ -91,80 +93,100 @@ const RealAirplane = () => {
       // === SHOOTING LOGIC ===
       if (isShooting && t - laserState.current.lastShoot > 0.05) {
         const idx = laserState.current.nextIdx;
-        const laser = lasersData.current[idx];
-        laser.active = true;
-        laser.life = 0;
         
-        // Get world position and directions
-        const worldPos = new THREE.Vector3();
+        // Directions
         const forward = new THREE.Vector3(0, 0, 1).applyQuaternion(group.current.quaternion).normalize();
         const right = new THREE.Vector3(1, 0, 0).applyQuaternion(group.current.quaternion).normalize();
         const up = new THREE.Vector3(0, 1, 0).applyQuaternion(group.current.quaternion).normalize();
         
-        group.current.getWorldPosition(worldPos);
-        
-        // Alternate between left and right wing (or shoot from nose if you prefer, but wings look cooler)
+        // Common offsets
         const isLeft = idx % 2 === 0;
-        const sideOffset = right.clone().multiplyScalar(isLeft ? -1.8 : 1.8); // Width of wings
-        const forwardOffset = forward.clone().multiplyScalar(2.0); // Slightly forward
-        const downOffset = up.clone().multiplyScalar(-0.3); // Slightly under the wing
+        const sideOffset = right.clone().multiplyScalar(isLeft ? -1.8 : 1.8);
+        const forwardOffset = forward.clone().multiplyScalar(2.0);
+        const downOffset = up.clone().multiplyScalar(-0.3);
         
-        laser.position.copy(worldPos).add(forwardOffset).add(sideOffset).add(downOffset);
-        
-        // Bullet velocity + random spread
-        laser.velocity.copy(forward).multiplyScalar(80);
-        laser.velocity.x += (Math.random() - 0.5) * 3;
-        laser.velocity.y += (Math.random() - 0.5) * 3;
+        // --- MAIN JET (Cyan) ---
+        const laser1 = lasersData1.current[idx];
+        laser1.active = true; laser1.life = 0;
+        const mainPos = new THREE.Vector3();
+        group.current.getWorldPosition(mainPos);
+        laser1.position.copy(mainPos).add(forwardOffset).add(sideOffset).add(downOffset);
+        laser1.velocity.copy(forward).multiplyScalar(80);
+        laser1.velocity.x += (Math.random() - 0.5) * 3;
+        laser1.velocity.y += (Math.random() - 0.5) * 3;
+
+        // --- LEFT WINGMAN (Magenta) ---
+        if (leftWingmanGroup.current) {
+          const laser2 = lasersData2.current[idx];
+          laser2.active = true; laser2.life = 0;
+          const leftPos = new THREE.Vector3();
+          leftWingmanGroup.current.getWorldPosition(leftPos);
+          laser2.position.copy(leftPos).add(forwardOffset).add(sideOffset).add(downOffset);
+          laser2.velocity.copy(forward).multiplyScalar(80);
+          laser2.velocity.x += (Math.random() - 0.5) * 3;
+          laser2.velocity.y += (Math.random() - 0.5) * 3;
+        }
+
+        // --- RIGHT WINGMAN (Yellow) ---
+        if (rightWingmanGroup.current) {
+          const laser3 = lasersData3.current[idx];
+          laser3.active = true; laser3.life = 0;
+          const rightPos = new THREE.Vector3();
+          rightWingmanGroup.current.getWorldPosition(rightPos);
+          laser3.position.copy(rightPos).add(forwardOffset).add(sideOffset).add(downOffset);
+          laser3.velocity.copy(forward).multiplyScalar(80);
+          laser3.velocity.x += (Math.random() - 0.5) * 3;
+          laser3.velocity.y += (Math.random() - 0.5) * 3;
+        }
         
         laserState.current.nextIdx = (idx + 1) % LASER_COUNT;
         laserState.current.lastShoot = t;
         
-        // Recoil effect (push back) and Shake effect
+        // Recoil effect (push back) and Shake effect (only for main group)
         group.current.position.add(forward.clone().multiplyScalar(-0.08));
         group.current.rotation.z += (Math.random() - 0.5) * 0.1;
       }
       
       // === AFTERBURNER LOGIC ===
       if (leftEngine.current && rightEngine.current) {
-        // Base flicker
         const flicker = 0.8 + Math.random() * 0.4;
-        // Intensify and elongate during shooting dash
         const thrustScale = isShooting ? 2.5 : 1;
-        
         leftEngine.current.scale.set(flicker, flicker * thrustScale, flicker);
         rightEngine.current.scale.set(flicker, flicker * thrustScale, flicker);
       }
     }
     
     // === UPDATE LASERS ===
-    if (lasersRef.current) {
-      const dummyObj = new THREE.Object3D();
+    const dummyObj = new THREE.Object3D();
+    const updateLasers = (dataRef, meshRef) => {
+      if (!meshRef.current) return;
       for (let i = 0; i < LASER_COUNT; i++) {
-        const laser = lasersData.current[i];
+        const laser = dataRef.current[i];
         if (laser.active) {
           laser.life += 0.016; // approx 60fps delta
           laser.position.add(laser.velocity.clone().multiplyScalar(0.016));
           
           dummyObj.position.copy(laser.position);
           dummyObj.lookAt(laser.position.clone().add(laser.velocity));
-          dummyObj.rotateX(Math.PI / 2); // Align cylinder along trajectory
-          
-          // Stretch bullet based on speed for motion blur look
+          dummyObj.rotateX(Math.PI / 2);
           dummyObj.scale.set(1, 4, 1);
           dummyObj.updateMatrix();
-          lasersRef.current.setMatrixAt(i, dummyObj.matrix);
+          meshRef.current.setMatrixAt(i, dummyObj.matrix);
           
-          // Die after 1 second
           if (laser.life > 1) {
             laser.active = false;
             dummyObj.scale.set(0, 0, 0);
             dummyObj.updateMatrix();
-            lasersRef.current.setMatrixAt(i, dummyObj.matrix);
+            meshRef.current.setMatrixAt(i, dummyObj.matrix);
           }
         }
       }
-      lasersRef.current.instanceMatrix.needsUpdate = true;
-    }
+      meshRef.current.instanceMatrix.needsUpdate = true;
+    };
+
+    updateLasers(lasersData1, lasersRef1);
+    updateLasers(lasersData2, lasersRef2);
+    updateLasers(lasersData3, lasersRef3);
   });
 
   return (
@@ -185,7 +207,7 @@ const RealAirplane = () => {
         </group>
 
         {/* ================= LEFT WINGMAN ================= */}
-        <group position={[-5, -1.5, -5]}>
+        <group ref={leftWingmanGroup} position={[-5, -1.5, -5]}>
           <primitive object={leftWingman} scale={0.012} rotation={[0, 0, 0]} />
           <mesh position={[-0.45, 0.08, -3.6]} rotation={[Math.PI / 2, 0, 0]}>
             <coneGeometry args={[0.2, 1.5, 16]} />
@@ -198,7 +220,7 @@ const RealAirplane = () => {
         </group>
 
         {/* ================= RIGHT WINGMAN ================= */}
-        <group position={[5, -1.5, -5]}>
+        <group ref={rightWingmanGroup} position={[5, -1.5, -5]}>
           <primitive object={rightWingman} scale={0.012} rotation={[0, 0, 0]} />
           <mesh position={[-0.45, 0.08, -3.6]} rotation={[Math.PI / 2, 0, 0]}>
             <coneGeometry args={[0.2, 1.5, 16]} />
@@ -212,9 +234,22 @@ const RealAirplane = () => {
       </group>
       
       {/* Laser Projectiles */}
-      <instancedMesh ref={lasersRef} args={[null, null, LASER_COUNT]}>
+      {/* Main Jet Lasers (Cyan) */}
+      <instancedMesh ref={lasersRef1} args={[null, null, LASER_COUNT]}>
         <cylinderGeometry args={[0.02, 0.02, 1, 8]} />
         <meshStandardMaterial color="#00ffff" emissive="#00ffff" emissiveIntensity={5} toneMapped={false} />
+      </instancedMesh>
+      
+      {/* Left Wingman Lasers (Magenta) */}
+      <instancedMesh ref={lasersRef2} args={[null, null, LASER_COUNT]}>
+        <cylinderGeometry args={[0.02, 0.02, 1, 8]} />
+        <meshStandardMaterial color="#ff00ff" emissive="#ff00ff" emissiveIntensity={5} toneMapped={false} />
+      </instancedMesh>
+      
+      {/* Right Wingman Lasers (Yellow) */}
+      <instancedMesh ref={lasersRef3} args={[null, null, LASER_COUNT]}>
+        <cylinderGeometry args={[0.02, 0.02, 1, 8]} />
+        <meshStandardMaterial color="#ffaa00" emissive="#ffaa00" emissiveIntensity={5} toneMapped={false} />
       </instancedMesh>
     </>
   );
