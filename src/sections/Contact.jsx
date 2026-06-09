@@ -1,8 +1,13 @@
 import { useRef, useState } from "react";
 import emailjs from "@emailjs/browser";
+import { useGSAP } from "@gsap/react";
+import gsap from "gsap";
+import { ScrollTrigger } from "gsap/ScrollTrigger";
 
 import TitleHeader from "../components/TitleHeader";
 import ContactExperience from "../components/models/contact/ContactExperience";
+
+gsap.registerPlugin(ScrollTrigger);
 
 const Contact = () => {
   const formRef = useRef(null);
@@ -11,6 +16,19 @@ const Contact = () => {
     name: "",
     email: "",
     message: "",
+  });
+
+  useGSAP(() => {
+    gsap.fromTo(
+      ".contact-left",
+      { x: -50, opacity: 0 },
+      { x: 0, opacity: 1, duration: 1, ease: "power2.out", scrollTrigger: { trigger: "#contact", start: "top center+=100" } }
+    );
+    gsap.fromTo(
+      ".contact-right",
+      { x: 50, opacity: 0 },
+      { x: 0, opacity: 1, duration: 1, ease: "power2.out", scrollTrigger: { trigger: "#contact", start: "top center+=100" } }
+    );
   });
 
   const handleChange = (e) => {
@@ -48,8 +66,8 @@ const Contact = () => {
           title="Get in Touch – Let’s Connect"
           sub="💬 Have questions or ideas? Let’s talk! 🚀"
         />
-        <div className="grid-12-cols mt-16">
-          <div className="xl:col-span-5">
+        <div className="grid-12-cols mt-16 overflow-hidden">
+          <div className="xl:col-span-5 contact-left">
             <div className="flex-center card-border rounded-xl p-10">
               <form
                 ref={formRef}
@@ -109,7 +127,7 @@ const Contact = () => {
               </form>
             </div>
           </div>
-          <div className="xl:col-span-7 min-h-96">
+          <div className="xl:col-span-7 min-h-96 contact-right">
             <div className="bg-[#050c18] border border-white-50/10 w-full h-full rounded-3xl overflow-hidden shadow-2xl">
               <ContactExperience />
             </div>
