@@ -51,6 +51,7 @@ const Scholarships = () => {
   return (
     <section id="scholarships" className="flex-center section-padding relative">
       {/* Decorative background glow */}
+      <div className="absolute inset-0 bg-diagonal-stripes mask-radial-faded pointer-events-none opacity-50" />
       <div className="absolute top-1/2 left-1/2 -translate-x-1/2 -translate-y-1/2 w-[500px] h-[250px] bg-blue-500/10 rounded-full blur-[120px] pointer-events-none" />
 
       <div className="w-full h-full md:px-10 px-5 relative z-10">

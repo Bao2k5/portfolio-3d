@@ -56,6 +56,12 @@ section {
     animation: scanLines 5s linear infinite;
   }
 
+  .bg-diagonal-stripes {
+    background-image: repeating-linear-gradient(45deg, transparent, transparent 20px, rgba(255, 255, 255, 0.05) 20px, rgba(255, 255, 255, 0.05) 40px);
+    background-size: 200% 200%;
+    animation: moveStripes 20s linear infinite;
+  }
+
   .mask-radial-faded {
     mask-image: radial-gradient(circle at center, black 30%, transparent 80%);
     -webkit-mask-image: radial-gradient(circle at center, black 30%, transparent 80%);
@@ -512,4 +518,9 @@ section {
 @keyframes scanLines {
   0% { background-position: 0 0; }
   100% { background-position: 0 400px; }
+}
+
+@keyframes moveStripes {
+  0% { background-position: 0 0; }
+  100% { background-position: 100px 100px; }
 }
