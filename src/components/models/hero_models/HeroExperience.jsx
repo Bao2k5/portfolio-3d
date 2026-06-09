@@ -101,11 +101,11 @@ const RealAirplane = () => {
         _right.set(1, 0, 0).applyQuaternion(group.current.quaternion).normalize();
         _up.set(0, 1, 0).applyQuaternion(group.current.quaternion).normalize();
         
-        // Common offsets
+        // Common offsets (adjusted to fit the smaller plane scale)
         const isLeft = idx % 2 === 0;
-        _sideOffset.copy(_right).multiplyScalar(isLeft ? -1.8 : 1.8);
-        _forwardOffset.copy(_forward).multiplyScalar(2.0);
-        _downOffset.copy(_up).multiplyScalar(-0.3);
+        _sideOffset.copy(_right).multiplyScalar(isLeft ? -0.6 : 0.6); // Middle of the wings
+        _forwardOffset.copy(_forward).multiplyScalar(0.5); // Under the wings
+        _downOffset.copy(_up).multiplyScalar(-0.1); // Slightly down
         
         // --- MAIN JET (Cyan) ---
         const laser1 = lasersData1.current[idx];
