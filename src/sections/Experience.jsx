@@ -22,10 +22,10 @@ const Experience = () => {
         opacity: 0,
         // Set the origin of the animation to the left side of the card
         transformOrigin: "left left",
-        // Animate over 1 second
-        duration: 1,
-        // Use a power2 ease-in-out curve
-        ease: "power2.inOut",
+        // Animate over 1.5 seconds
+        duration: 1.5,
+        // Use a power3 ease-in-out curve
+        ease: "power3.inOut",
         // Trigger the animation when the card is 80% of the way down the screen
         scrollTrigger: {
           // The card is the trigger element

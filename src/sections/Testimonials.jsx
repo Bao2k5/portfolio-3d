@@ -18,9 +18,9 @@ const Testimonials = () => {
       {
         y: 0,
         opacity: 1,
-        duration: 1,
-        stagger: 0.15,
-        ease: "power2.out",
+        duration: 1.5,
+        stagger: 0.3,
+        ease: "power3.out",
         scrollTrigger: {
           trigger: "#testimonials",
           start: "top center+=100",

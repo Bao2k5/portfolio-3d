@@ -183,9 +183,13 @@ const AppShowcase = () => {
         {
           y: 0,
           opacity: 1,
-          duration: 0.5,
-          stagger: 0.08,
-          ease: "power2.out",
+          duration: 1.5,
+          stagger: 0.15,
+          ease: "power3.out",
+          scrollTrigger: {
+            trigger: gridRef.current,
+            start: "top bottom-=100",
+          }
         }
       );
     }

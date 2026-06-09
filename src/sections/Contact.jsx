@@ -22,12 +22,12 @@ const Contact = () => {
     gsap.fromTo(
       ".contact-left",
       { x: -50, opacity: 0 },
-      { x: 0, opacity: 1, duration: 1, ease: "power2.out", scrollTrigger: { trigger: "#contact", start: "top center+=100" } }
+      { x: 0, opacity: 1, duration: 1.5, ease: "power3.out", scrollTrigger: { trigger: "#contact", start: "top center+=100" } }
     );
     gsap.fromTo(
       ".contact-right",
       { x: 50, opacity: 0 },
-      { x: 0, opacity: 1, duration: 1, ease: "power2.out", scrollTrigger: { trigger: "#contact", start: "top center+=100" } }
+      { x: 0, opacity: 1, duration: 1.5, ease: "power3.out", scrollTrigger: { trigger: "#contact", start: "top center+=100" } }
     );
   });
 

@@ -13,8 +13,9 @@ const Scholarships = () => {
       {
         y: 0,
         opacity: 1,
-        duration: 0.8,
-        stagger: 0.2,
+        duration: 1.5,
+        stagger: 0.3,
+        ease: "power3.out",
         scrollTrigger: {
           trigger: "#scholarships",
           start: "top center+=100",
