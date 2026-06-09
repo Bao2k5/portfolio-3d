@@ -88,17 +88,24 @@ const RealAirplane = () => {
         laser.active = true;
         laser.life = 0;
         
-        // Get world position and direction of airplane
+        // Get world position and directions
         const worldPos = new THREE.Vector3();
-        const worldDir = new THREE.Vector3(0, 0, 1);
-        group.current.getWorldPosition(worldPos);
-        worldDir.applyQuaternion(group.current.quaternion).normalize();
+        const forward = new THREE.Vector3(0, 0, 1).applyQuaternion(group.current.quaternion).normalize();
+        const right = new THREE.Vector3(1, 0, 0).applyQuaternion(group.current.quaternion).normalize();
+        const up = new THREE.Vector3(0, 1, 0).applyQuaternion(group.current.quaternion).normalize();
         
-        // Spawn slightly ahead of the nose
-        laser.position.copy(worldPos).add(worldDir.clone().multiplyScalar(1.5));
+        group.current.getWorldPosition(worldPos);
+        
+        // Alternate between left and right wing (or shoot from nose if you prefer, but wings look cooler)
+        const isLeft = idx % 2 === 0;
+        const sideOffset = right.clone().multiplyScalar(isLeft ? -1.8 : 1.8); // Width of wings
+        const forwardOffset = forward.clone().multiplyScalar(2.0); // Slightly forward
+        const downOffset = up.clone().multiplyScalar(-0.3); // Slightly under the wing
+        
+        laser.position.copy(worldPos).add(forwardOffset).add(sideOffset).add(downOffset);
         
         // Bullet velocity + random spread
-        laser.velocity.copy(worldDir).multiplyScalar(80);
+        laser.velocity.copy(forward).multiplyScalar(80);
         laser.velocity.x += (Math.random() - 0.5) * 3;
         laser.velocity.y += (Math.random() - 0.5) * 3;
         
@@ -106,7 +113,7 @@ const RealAirplane = () => {
         laserState.current.lastShoot = t;
         
         // Recoil effect (push back) and Shake effect
-        group.current.position.add(worldDir.clone().multiplyScalar(-0.08));
+        group.current.position.add(forward.clone().multiplyScalar(-0.08));
         group.current.rotation.z += (Math.random() - 0.5) * 0.1;
       }
     }
