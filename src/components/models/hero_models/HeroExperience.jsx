@@ -21,13 +21,15 @@ const RealAirplane = () => {
   const leftEngine = useRef();
   const rightEngine = useRef();
   
-  // Load the downloaded GLB model
-  const { scene } = useGLTF("/models/airplane.glb");
+  // Load the downloaded GLB models
+  const { scene: mainScene } = useGLTF("/models/airplane.glb");
+  const { scene: w1Scene } = useGLTF("/models/wingman1.glb");
+  const { scene: w2Scene } = useGLTF("/models/wingman2.glb");
   
-  // Clone the scene for main jet and wingmen
-  const mainJet = useMemo(() => scene.clone(), [scene]);
-  const leftWingman = useMemo(() => scene.clone(), [scene]);
-  const rightWingman = useMemo(() => scene.clone(), [scene]);
+  // Clone the scenes
+  const mainJet = useMemo(() => mainScene.clone(), [mainScene]);
+  const leftWingman = useMemo(() => w1Scene.clone(), [w1Scene]);
+  const rightWingman = useMemo(() => w2Scene.clone(), [w2Scene]);
 
   useFrame((state) => {
     const t = state.clock.getElapsedTime();
@@ -289,3 +291,7 @@ const HeroExperience = () => {
 };
 
 export default HeroExperience;
+
+useGLTF.preload("/models/airplane.glb");
+useGLTF.preload("/models/wingman1.glb");
+useGLTF.preload("/models/wingman2.glb");
