@@ -24,8 +24,10 @@ const RealAirplane = () => {
   // Load the downloaded GLB model
   const { scene } = useGLTF("/models/airplane.glb");
   
-  // Clone the scene so it can be reused safely
-  const airplaneScene = useMemo(() => scene.clone(), [scene]);
+  // Clone the scene for main jet and wingmen
+  const mainJet = useMemo(() => scene.clone(), [scene]);
+  const leftWingman = useMemo(() => scene.clone(), [scene]);
+  const rightWingman = useMemo(() => scene.clone(), [scene]);
 
   useFrame((state) => {
     const t = state.clock.getElapsedTime();
@@ -166,20 +168,45 @@ const RealAirplane = () => {
   return (
     <>
       <group ref={group}>
-        {/* Adjust scale and rotation here if needed */}
-        <primitive object={airplaneScene} scale={0.015} rotation={[0, 0, 0]} />
-        
-        {/* Left Engine Afterburner */}
-        <mesh ref={leftEngine} position={[-0.55, 0.1, -4.5]} rotation={[Math.PI / 2, 0, 0]}>
-          <coneGeometry args={[0.25, 2, 16]} />
-          <meshStandardMaterial color="#ff8c00" emissive="#ff4500" emissiveIntensity={6} toneMapped={false} transparent opacity={0.9} />
-        </mesh>
-        
-        {/* Right Engine Afterburner */}
-        <mesh ref={rightEngine} position={[0.55, 0.1, -4.5]} rotation={[Math.PI / 2, 0, 0]}>
-          <coneGeometry args={[0.25, 2, 16]} />
-          <meshStandardMaterial color="#ff8c00" emissive="#ff4500" emissiveIntensity={6} toneMapped={false} transparent opacity={0.9} />
-        </mesh>
+        {/* ================= MAIN JET ================= */}
+        <group>
+          <primitive object={mainJet} scale={0.015} rotation={[0, 0, 0]} />
+          {/* Main Jet Afterburners */}
+          <mesh ref={leftEngine} position={[-0.55, 0.1, -4.5]} rotation={[Math.PI / 2, 0, 0]}>
+            <coneGeometry args={[0.25, 2, 16]} />
+            <meshStandardMaterial color="#ff8c00" emissive="#ff4500" emissiveIntensity={6} toneMapped={false} transparent opacity={0.9} />
+          </mesh>
+          <mesh ref={rightEngine} position={[0.55, 0.1, -4.5]} rotation={[Math.PI / 2, 0, 0]}>
+            <coneGeometry args={[0.25, 2, 16]} />
+            <meshStandardMaterial color="#ff8c00" emissive="#ff4500" emissiveIntensity={6} toneMapped={false} transparent opacity={0.9} />
+          </mesh>
+        </group>
+
+        {/* ================= LEFT WINGMAN ================= */}
+        <group position={[-5, -1.5, -5]}>
+          <primitive object={leftWingman} scale={0.012} rotation={[0, 0, 0]} />
+          <mesh position={[-0.45, 0.08, -3.6]} rotation={[Math.PI / 2, 0, 0]}>
+            <coneGeometry args={[0.2, 1.5, 16]} />
+            <meshStandardMaterial color="#00aaff" emissive="#00ffff" emissiveIntensity={5} toneMapped={false} transparent opacity={0.8} />
+          </mesh>
+          <mesh position={[0.45, 0.08, -3.6]} rotation={[Math.PI / 2, 0, 0]}>
+            <coneGeometry args={[0.2, 1.5, 16]} />
+            <meshStandardMaterial color="#00aaff" emissive="#00ffff" emissiveIntensity={5} toneMapped={false} transparent opacity={0.8} />
+          </mesh>
+        </group>
+
+        {/* ================= RIGHT WINGMAN ================= */}
+        <group position={[5, -1.5, -5]}>
+          <primitive object={rightWingman} scale={0.012} rotation={[0, 0, 0]} />
+          <mesh position={[-0.45, 0.08, -3.6]} rotation={[Math.PI / 2, 0, 0]}>
+            <coneGeometry args={[0.2, 1.5, 16]} />
+            <meshStandardMaterial color="#00aaff" emissive="#00ffff" emissiveIntensity={5} toneMapped={false} transparent opacity={0.8} />
+          </mesh>
+          <mesh position={[0.45, 0.08, -3.6]} rotation={[Math.PI / 2, 0, 0]}>
+            <coneGeometry args={[0.2, 1.5, 16]} />
+            <meshStandardMaterial color="#00aaff" emissive="#00ffff" emissiveIntensity={5} toneMapped={false} transparent opacity={0.8} />
+          </mesh>
+        </group>
       </group>
       
       {/* Laser Projectiles */}
