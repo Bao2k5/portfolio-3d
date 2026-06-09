@@ -41,20 +41,19 @@ section {
     background-size: 40px 40px;
     background-image: linear-gradient(to right, rgba(255, 255, 255, 0.1) 1px, transparent 1px),
                       linear-gradient(to bottom, rgba(255, 255, 255, 0.1) 1px, transparent 1px);
+    animation: moveGrid 10s linear infinite;
   }
 
   .bg-dots-pattern {
     background-image: radial-gradient(rgba(255, 255, 255, 0.25) 1.5px, transparent 1.5px);
     background-size: 20px 20px;
+    animation: moveDots 15s linear infinite;
   }
 
   .bg-cyber-lines {
-    background: repeating-linear-gradient(
-      0deg,
-      transparent,
-      transparent 19px,
-      rgba(0, 255, 255, 0.15) 20px
-    );
+    background-image: linear-gradient(0deg, transparent 90%, rgba(0, 255, 255, 0.2) 100%);
+    background-size: 100% 20px;
+    animation: scanLines 5s linear infinite;
   }
 
   .mask-radial-faded {
@@ -498,4 +497,19 @@ section {
 
 .card:hover::before {
   opacity: 1;
+}
+
+@keyframes moveGrid {
+  0% { background-position: 0 0; }
+  100% { background-position: 40px 40px; }
+}
+
+@keyframes moveDots {
+  0% { background-position: 0 0; }
+  100% { background-position: 0 -400px; }
+}
+
+@keyframes scanLines {
+  0% { background-position: 0 0; }
+  100% { background-position: 0 400px; }
 }
