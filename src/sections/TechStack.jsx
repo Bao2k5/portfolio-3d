@@ -29,7 +29,8 @@ const TechStack = () => {
 
   return (
     <section id="skills" className="flex-center section-padding relative">
-      <div className="absolute inset-0 bg-cyber-lines mask-radial-faded pointer-events-none opacity-20" />
+      <div className="absolute inset-0 bg-cyber-lines mask-radial-faded pointer-events-none opacity-50" />
+      <div className="absolute inset-0 bg-[radial-gradient(ellipse_at_center,rgba(255,0,255,0.05),transparent_70%)] pointer-events-none" />
       <div className="w-full h-full md:px-10 px-5 relative z-10">
         <TitleHeader
           title="How I Can Contribute & My Key Skills"

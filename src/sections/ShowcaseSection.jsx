@@ -193,7 +193,8 @@ const AppShowcase = () => {
 
   return (
     <section id="work" ref={sectionRef} className="app-showcase flex flex-col items-center w-full section-padding relative">
-      <div className="absolute inset-0 bg-grid-pattern mask-radial-faded pointer-events-none opacity-30" />
+      <div className="absolute inset-0 bg-grid-pattern mask-radial-faded pointer-events-none opacity-50" />
+      <div className="absolute inset-0 bg-[radial-gradient(ellipse_at_bottom,rgba(255,200,0,0.05),transparent_70%)] pointer-events-none" />
       <div className="w-full max-w-7xl relative z-10">
         {/* Title and Subtitle */}
         <div className="flex flex-col items-center gap-4 mb-12 text-center">
