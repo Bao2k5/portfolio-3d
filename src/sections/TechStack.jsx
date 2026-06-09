@@ -48,8 +48,11 @@ const TechStack = () => {
                 <div className="tech-icon-wrapper">
                   <TechIconCardExperience model={techStackIcon} />
                 </div>
-                <div className="padding-x w-full">
-                  <p>{techStackIcon.name}</p>
+                <div className="padding-x w-full flex flex-col items-center justify-center gap-2">
+                  <p className="text-white font-bold text-xl text-center">{techStackIcon.name}</p>
+                  <p className="text-white-50 text-sm md:text-base text-center leading-relaxed max-w-[90%]">
+                    {techStackIcon.description}
+                  </p>
                 </div>
               </div>
             </div>

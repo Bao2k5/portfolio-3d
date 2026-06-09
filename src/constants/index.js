@@ -86,34 +86,39 @@ const techStackImgs = [
 
 const techStackIcons = [
   {
-    name: "Next.js Developer",
-    modelPath: "/models/react_logo-transformed.glb",
-    scale: 1,
-    rotation: [0, 0, 0],
-  },
-  {
-    name: "Python / ML Engineer",
+    name: "Programming Languages",
+    description: "JavaScript, Python, C/C++, SQL, C#",
     modelPath: "/models/python-transformed.glb",
     scale: 0.8,
     rotation: [0, 0, 0],
   },
   {
-    name: "Node.js Backend",
+    name: "Backend & Frameworks",
+    description: "Next.js, Node.js, Express.js, React.js, MongoDB, WebSocket, REST APIs",
     modelPath: "/models/node-transformed.glb",
     scale: 5,
     rotation: [0, -Math.PI / 2, 0],
   },
   {
-    name: "Three.js / WebGL",
+    name: "Cloud & DevOps",
+    description: "AWS (EC2, S3, DynamoDB, IAM, IoT Core), Docker, Linux",
+    modelPath: "/models/git-svg-transformed.glb",
+    scale: 0.05,
+    rotation: [0, -Math.PI / 4, 0],
+  },
+  {
+    name: "Tools & Libraries",
+    description: "Git, Postman, OpenCV, VS Code, Three.js",
     modelPath: "/models/three.js-transformed.glb",
     scale: 0.05,
     rotation: [0, 0, 0],
   },
   {
-    name: "Git & DevOps",
-    modelPath: "/models/git-svg-transformed.glb",
-    scale: 0.05,
-    rotation: [0, -Math.PI / 4, 0],
+    name: "Frontend & UI/UX",
+    description: "HTML, CSS, Tailwind CSS, WebGL, GSAP",
+    modelPath: "/models/react_logo-transformed.glb",
+    scale: 1,
+    rotation: [0, 0, 0],
   },
 ];
 
