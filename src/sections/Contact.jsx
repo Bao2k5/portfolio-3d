@@ -50,8 +50,10 @@ const Contact = () => {
 
       // Reset form and stop loading
       setForm({ name: "", email: "", message: "" });
+      alert("Cảm ơn bạn! Tin nhắn của bạn đã được gửi thành công. 🚀");
     } catch (error) {
       console.error("EmailJS Error:", error); // Optional: show toast
+      alert("Đã xảy ra lỗi khi gửi tin nhắn. Vui lòng kiểm tra cấu hình hoặc thử lại sau! ❌");
     } finally {
       setLoading(false); // Always stop loading, even on error
     }
