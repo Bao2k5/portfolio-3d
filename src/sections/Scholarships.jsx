@@ -37,15 +37,15 @@ const Scholarships = () => {
       glowColor: "rgba(245, 158, 11, 0.15)",
     },
     {
-      title: "Encouragement Academic Scholarship - Good Category",
-      titleVi: "Học bổng Khuyến khích Học tập loại Khá",
+      title: "Excellent Academic Scholarship",
+      titleVi: "Học bổng Khuyến khích Học tập loại Giỏi",
       semester: "Semester 2 (Academic Year 2025 - 2026)",
-      desc: "Awarded by Vietnam Aviation Academy to students with good academic standing, demonstrating high effort, consistent grades, and active training points.",
-      badge: "🏅 Good Award",
-      stars: 4,
-      color: "from-blue-500/20 to-cyan-500/5",
-      borderColor: "group-hover:border-blue-500/50",
-      glowColor: "rgba(59, 130, 246, 0.15)",
+      desc: "Awarded by Vietnam Aviation Academy to students with exceptional academic standing, ranking at the top tier of the major with outstanding GPA and training points.",
+      badge: "🏆 Excellent Award",
+      stars: 5,
+      color: "from-amber-500/20 to-yellow-500/5",
+      borderColor: "group-hover:border-amber-500/50",
+      glowColor: "rgba(245, 158, 11, 0.15)",
     },
   ];
 

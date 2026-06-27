@@ -56,7 +56,7 @@ const projectCategories = {
       tagline: "Multiplayer Game ⚔️"
     }
   ],
-  aiIot: [
+  fullstack: [
     {
       title: "Smart Jewelry Store Platform (TTTN)",
       desc: "Hybrid Cloud-Edge O2O platform for retail store operations. Integrates real-time Edge AI (YOLO11, InsightFace, MediaPipe) with physical ESP32 security modules, full-stack admin panel, and stripe payments.",
@@ -74,14 +74,6 @@ const projectCategories = {
       tagline: "IoT Infrastructure 📡"
     },
     {
-      title: "Credit Card Default Prediction (Mayhoc)",
-      desc: "A machine learning pipeline comparing and optimizing models (LightGBM, XGBoost, Random Forest) to forecast credit defaults with high accuracy and ROC-AUC metrics.",
-      tech: ["Python", "Jupyter Notebook", "LightGBM", "XGBoost", "Scikit-Learn"],
-      link: "https://github.com/Bao2k5/Mayhoc",
-      image: "/images/project3.png",
-      tagline: "Predictive Analytics 📊"
-    },
-    {
       title: "Digital Image Processing & CV Library",
       desc: "Custom implementation of computer vision algorithms, filters (gaussian, median), edge detection kernels, and morphology operations.",
       tech: ["Python", "OpenCV", "NumPy", "Computer Vision"],
@@ -89,24 +81,6 @@ const projectCategories = {
       image: "/images/cv_library.png",
       tagline: "Computer Vision 👁️"
     },
-    {
-      title: "XLA_TL (Image Processing Essay)",
-      desc: "An academic research and implementation project covering advanced image processing algorithms and techniques.",
-      tech: ["Python", "Image Processing", "Research"],
-      link: "https://github.com/MinhAnh248/XLA_TL",
-      image: "/images/xla_tl.png",
-      tagline: "Academic Essay 📚"
-    },
-    {
-      title: "AI Team Portfolio",
-      desc: "A collaborative showcase platform displaying various AI solutions and models implemented by the NVT AI Solution Team.",
-      tech: ["AI Research", "Team Showcase", "Web"],
-      link: "https://github.com/NVT-AI-Solution-Teams/AI-Team-Portfolio",
-      image: "/images/ai_portfolio.png",
-      tagline: "Team Portfolio 🤖"
-    }
-  ],
-  webFullstack: [
     {
       title: "FastFood Fullstack Store",
       desc: "Java Spring Boot fast food ordering platform with React client app. Features admin product listing, order management, secure cart checkout, and relational database logs.",
@@ -122,36 +96,12 @@ const projectCategories = {
       link: "https://github.com/Bao2k5/hmjewelry",
       image: "/images/hmjewelry.png",
       tagline: "Frontend Client 💎"
-    },
-    {
-      title: "doangit - Express Phone Store",
-      desc: "Phone retail web app utilizing Express server, Docker containers, MongoDB Atlas integration, and clean MVC architecture.",
-      tech: ["Node.js", "Express.js", "MongoDB", "Docker"],
-      link: "https://github.com/Bao2k5/doangit",
-      image: "/images/doangit.png",
-      tagline: "Collaborative Lab 📱"
-    },
-    {
-      title: "luyentienganh English Learning App",
-      desc: "English vocabulary and language flashcard application featuring customized quizzing and spaced repetition learning logic.",
-      tech: ["HTML5", "CSS3", "JavaScript"],
-      link: "https://github.com/Bao2k5/luyentienganh",
-      image: "/images/english_app.png",
-      tagline: "Interactive Education 📖"
-    },
-    {
-      title: "LaptrinhPy (Python Programming)",
-      desc: "A collection of collaborative Python programming exercises and mini-projects demonstrating problem-solving skills.",
-      tech: ["Python", "Algorithms", "Data Structures"],
-      link: "https://github.com/HungLEEE2709/LaptrinhPy",
-      image: "/images/laptrinhpy.png",
-      tagline: "Programming 🐍"
     }
   ]
 };
 
 const AppShowcase = () => {
-  const [activeTab, setActiveTab] = useState("webFullstack");
+  const [activeTab, setActiveTab] = useState("fullstack");
   const sectionRef = useRef(null);
   const gridRef = useRef(null);
 
@@ -216,24 +166,14 @@ const AppShowcase = () => {
         {/* Tab Switcher */}
         <div className="flex justify-center gap-2 md:gap-4 mb-12 bg-black-100 p-2 rounded-full border border-white-50/10 w-fit mx-auto shadow-2xl">
           <button
-            onClick={() => setActiveTab("webFullstack")}
+            onClick={() => setActiveTab("fullstack")}
             className={`px-5 py-2.5 rounded-full text-xs md:text-sm font-semibold transition-all duration-300 cursor-pointer ${
-              activeTab === "webFullstack"
+              activeTab === "fullstack"
                 ? "bg-cyan-500 text-black shadow-lg shadow-cyan-500/20"
                 : "text-white-50 hover:text-white"
             }`}
           >
-            💻 Web Dev ({projectCategories.webFullstack.length})
-          </button>
-          <button
-            onClick={() => setActiveTab("aiIot")}
-            className={`px-5 py-2.5 rounded-full text-xs md:text-sm font-semibold transition-all duration-300 cursor-pointer ${
-              activeTab === "aiIot"
-                ? "bg-cyan-500 text-black shadow-lg shadow-cyan-500/20"
-                : "text-white-50 hover:text-white"
-            }`}
-          >
-            🤖 AI & IoT ({projectCategories.aiIot.length})
+            💻 Full stack ({projectCategories.fullstack.length})
           </button>
           <button
             onClick={() => setActiveTab("games")}
